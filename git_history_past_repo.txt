@@ -1,0 +1,260 @@
+commit 72ad14e4381163d3e3e3efbbb6d3ab962328ef0f
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun May 7 14:32:44 2017 +0200
+
+    Add 3d rendering capabilities
+    
+    Needs optimization
+
+commit bacc7d0e5ac534bde719adb5d415e9743a2566f5
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Tue Apr 25 22:19:29 2017 +0200
+
+    Fix rendering bug and made image bitmap pixly
+
+commit f1b43c4d1c2f118394a0d53cbba91880aca54557
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sat Apr 22 22:51:38 2017 +0200
+
+    Add small front label to dimension guide
+
+commit 21cc5d940e65e7e368bf32d5f1bf9d5a0e366948
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sat Apr 22 22:43:30 2017 +0200
+
+    Add dimension guide to advanced set control
+
+commit 34cad70b60812db07823e0d87784df24e1a1d521
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Mon Apr 17 21:08:00 2017 +0200
+
+    Sandpiles3D: add visualization control
+
+commit d148ecc4e27748f190b6720ed699ea72f4536ede
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Thu Apr 13 11:41:50 2017 +0200
+
+    Sandpiles3D: Simplify bound fields to arrays
+
+commit 9de46e09884b69ecf4638e2e2973ef25a7969d58
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Wed Apr 12 23:00:29 2017 +0200
+
+    Refactor bound fields for model size in viewmodel
+
+commit e7f3b67af1bf6f73bb47ad89a1cf8ab54e48e132
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Apr 12 15:41:14 2017 +0200
+
+    Implement quick menu
+    
+    hardcoded bindings for now, should be dynamic and depend on list in viewmodel
+
+commit 3585a8c4e3950ab86008659e9885ffc86f1346bd
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Apr 12 14:05:56 2017 +0200
+
+    Add setSize functionality, resets fields manually, find better way later
+
+commit 9da230beaaa137e0bf162813372d4acb11799e57
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Apr 12 12:45:08 2017 +0200
+
+    Add setvalue for plane/line
+    
+    Mvvm structure: bound fields are very space-consuming inte the viewmodel, would've preferred them to be oneliners as in android
+
+commit 3fb1bdc752df2bdcc2b2dfe7acbde0fc1845716f
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Apr 12 11:24:06 2017 +0200
+
+    Implement setting of simple coordinates, no planes/lines yet.
+    
+    Due to older c# version i had to old'ify some code
+
+commit 2312ffc3ead8559c00b7a9f966f4c50afc4c50ef
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Tue Apr 11 21:44:35 2017 +0200
+
+    Implement iteration controls and removed old sample code
+
+commit 8ee4ebe65d9b1ca2d4294c4a1621661cb951766b
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Mon Apr 10 21:59:48 2017 +0200
+
+    Sandpiles3D: Add gui to level before move to wpf, limited functionality
+
+commit c4e4038f8895f839c47662d2a4e164c5df2c5aeb
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Mon Apr 10 20:43:10 2017 +0200
+
+    Sandpiles3D: Improve new gui
+
+commit be9549a6dd23e293acac45df8399df68e468159d
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Apr 9 19:01:14 2017 +0200
+
+    Sandpiles3D: fix gui
+
+commit 98b4c962a1ea0efa7b5694a0c2c351b123556055
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Apr 9 17:00:25 2017 +0200
+
+    Sandpiles3d: Continue conversion to WPF, implement iteration background worker
+
+commit 28e74496ff9edafb559265efb4909479bbccd968
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Apr 9 14:22:14 2017 +0200
+
+    Sandpiles3D: Start rewrite entire project in WPF with Mvvm structure
+
+commit 635cf3f2de2b53e640daf0cabee66905ec31b226
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Wed Apr 5 21:45:42 2017 +0200
+
+    Sandpiles3D: fix minor inconsistency in continuous iteration. Still bug persists, reproduce by setting size to 300x300x3 and do fill 6, mid 7, model.isStable() == true too early
+
+commit d4b370b9751935aa08007de20474d7955bd46cf8
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Wed Apr 5 21:13:32 2017 +0200
+
+    Sandpiles3D: Add additional quick access item
+
+commit 39f6a6d0a1664d489503c441fd04fefc8fc63cc4
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Tue Apr 4 23:42:56 2017 +0200
+
+    Sandpiles3D: add visualization mode flatten/cross section radio buttons
+
+commit 02c4df69ccb5d189a5d0a285e505e5a2a273fb0c
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Tue Apr 4 22:49:27 2017 +0200
+
+    Sandpiles3D: Added sleep to thread to prevent too many ui-updates
+
+commit 4c5d92d77ba8fc9c12fe48e31f6de5940db36318
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Tue Apr 4 22:38:33 2017 +0200
+
+    Sandpiles3D: revert use of maskedTextBoxes
+
+commit ccc7ff3c4513d3098b837b61357a29211679a6e9
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Thu Mar 30 20:13:34 2017 +0200
+
+    Sandpiles3D: Add advanced set value control
+
+commit 0891932069b93e2b33aec932d1fc6456253082dc
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Mar 29 16:35:47 2017 +0200
+
+    Unify string keys/resources
+
+commit 3e9a5c4de10caa37274653c2c437ae7e6759ed8d
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Wed Mar 29 08:59:28 2017 +0200
+
+    Sandpiles3D: Fix out of bounds bug and add size initializing in gui
+
+commit 7c2a3d782db95e0be411c12a393a5f67a52e716c
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Tue Mar 28 15:41:16 2017 +0200
+
+    Implemented backgroundWorker properly
+
+commit b09b958551482289074cee9d36d9029874058fb9
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Tue Mar 28 15:06:18 2017 +0200
+
+    Sandpiles3D: Bad/buggy implementation of backgroundWorker
+
+commit 2d2abba5479e8035d1a6dcdff1f82072b5e66f47
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Mon Mar 27 22:59:40 2017 +0200
+
+    Sandpiles3D: added size changing gui functionality, not thread safe yet
+
+commit 84c60195f803bc1d1bf30fca3731f158e4bf9d83
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 27 17:29:23 2017 +0200
+
+    Sandpiles3D: add gui advanced setup settings
+
+commit c86706fbad239b1035b64c07b912059cbacfce36
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 27 16:08:36 2017 +0200
+
+    Sandpiles3D: Added gui quick start state selection
+
+commit c466ba2999fb0301b6e4688e12624c40e23cc129
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 27 13:36:52 2017 +0200
+
+    Fixed bug with divide by zero under certain circumstances
+
+commit 2f81b56698cbe2e4c335c77d3a09f1f848aaecb4
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Mar 26 10:47:57 2017 +0200
+
+    Sandpiles: Fix error, causing most of the assymetry.
+
+commit 95e6bff06c73da81c6bdb5d140c6ed9a442c73ea
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Fri Mar 24 17:24:00 2017 +0100
+
+    Sandpiles: Fix logic bug, which made only last delta be saved
+
+commit 1274414c0897e258231fa8f42444b6983c9201c2
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Fri Mar 24 15:34:08 2017 +0100
+
+    Simplify some loops over dimensions
+
+commit 36bf4af5f27e22ca24772ea16ad8738edb3a5635
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Fri Mar 24 15:17:44 2017 +0100
+
+    Improve flattening of 3d space into RGB channel
+
+commit ef02c9b7ce523807c8df29cffb4bd15b396657a5
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Tue Mar 21 16:54:05 2017 +0100
+
+    Start of attempt to flatten the 3dspace into a 2d image in an visually interesting way
+
+commit c2af64e53f171fff7548674e8dd2a810a93ea287
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 20 16:30:40 2017 +0100
+
+    Sandpiles: Increase render area
+
+commit de1d0c51b192c0364e7441bf4fd3fcb2548b9b9f
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 20 16:21:13 2017 +0100
+
+    Found the culprit for the slowness in sandpiles. Remove horrible exception throwing in inner loop
+
+commit 55e8bcf96f58bbab0fde7801afb61020995d1066
+Author: Ghilt <Adam.n.a3@gmail.com>
+Date:   Mon Mar 20 16:04:52 2017 +0100
+
+    Tweak rendering of sandpiles a bit, now pixly instead of fuzzy
+
+commit 050eba2f9d67b98ac0032da2d7090abcc54f434c
+Merge: 2699afa 7a61dc2
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Mar 19 18:13:23 2017 +0100
+
+    Merge branch 'master' of github.com:Ghilt/MixMiscBag
+
+commit 2699afac7970a210ebe4ac403b4e87c60e048798
+Author: Adam Nilsson <adam.n.a3@gmail.com>
+Date:   Sun Mar 19 18:13:05 2017 +0100
+
+    Added small experiment of making a sandpiles demo but in 3d.
+    
+    Slow and needs more work
+    
+    inspired by:
+    https://www.youtube.com/watch?v=1MtEUErz7Gg
+    http://people.reed.edu/~davidp/web_sandpiles/
