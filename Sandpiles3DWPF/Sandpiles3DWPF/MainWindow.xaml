@@ -1,0 +1,15 @@
+﻿<Window x:Class="Sandpiles3DWPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sandpiles3DWPF"
+        xmlns:myViews="clr-namespace:Sandpiles3DWPF.View"
+        mc:Ignorable="d"
+        Title="Sandpiles3D" Height="800.958" Width="900.666">
+    <StackPanel Margin="0,10,0,0">
+
+        <myViews:SandpilesView x:Name = "SandpilesViewControl" Loaded = "SanpilesViewControl_Loaded" BorderThickness="1" Width="1183" HorizontalAlignment="Left" VerticalAlignment="Top" Height="847"  />
+
+    </StackPanel>
+</Window>

@@ -1,0 +1,27 @@
+﻿<Application x:Class="Sandpiles3DWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Sandpiles3DWPF"
+             xmlns:Converters="clr-namespace:Sandpiles3DWPF.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <Converters:ValueConverterGroup x:Key="enumToBoolToVisibilityConverter">
+                <Converters:EnumBoolConverter/>
+                <BooleanToVisibilityConverter/>
+            </Converters:ValueConverterGroup>
+            <Converters:ValueConverterGroup x:Key="enumToInvertBoolToVisibilityConverter">
+                <Converters:EnumBoolConverter/>
+                <Converters:InvertBoolConverter/>
+                <BooleanToVisibilityConverter/>
+            </Converters:ValueConverterGroup>
+            <Converters:CommandNameConverter x:Key="commandNameConverter"/>
+            <Converters:InvertBoolConverter x:Key="invertBoolConverter"/>
+            <Converters:CoordEnabledAidConverter x:Key="coordEnabledScaleConverter"/>
+            <Converters:EnumBoolConverter x:Key="enumBoolConverter"/>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="StyleDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

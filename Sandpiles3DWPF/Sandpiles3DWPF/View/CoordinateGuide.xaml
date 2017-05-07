@@ -1,0 +1,82 @@
+﻿<UserControl x:Class="Sandpiles3DWPF.View.CoordinateGuide"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sandpiles3DWPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Viewport3D  Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
+        <Viewport3D.Resources>
+            <SolidColorBrush Color="BlueViolet" Opacity="0.99" x:Key="ColorBrush0" />
+            <SolidColorBrush Color="Crimson" Opacity="0.99" x:Key="ColorBrush1" />
+            <SolidColorBrush Color="LawnGreen" Opacity="0.99" x:Key="ColorBrush2" />
+        </Viewport3D.Resources>
+
+        <Viewport3D.Camera>
+            <PerspectiveCamera Position="14,14,-26" LookDirection="-14,-14,26" 
+                         UpDirection="0,1,0" />
+        </Viewport3D.Camera>
+        <ModelVisual3D >
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <DirectionalLight Color="White" Direction="-1,-1,-3" />
+                    <GeometryModel3D >
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="0,10,10 0,-10,10 0,-10,-10 0,10,-10"
+                                            TriangleIndices="0 1 3 1 2 3"/>
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial Brush="{StaticResource ColorBrush0}"/>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Transform>
+                            <ScaleTransform3D ScaleY="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=0|1}"
+                                                              ScaleZ="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=0|2}"/>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <DirectionalLight Color="White" Direction="3,1,1" />
+                    <GeometryModel3D >
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="10,0,-10 -10,0,-10 -10,0,10 10,0,10"
+                                            TriangleIndices="0 1 3 1 2 3"/>
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial Brush="{StaticResource ColorBrush2}"/>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Transform>
+                            <ScaleTransform3D ScaleX="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=1|0}"
+                                                              ScaleZ="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=1|2}"/>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+        <ModelVisual3D>
+            <ModelVisual3D.Content>
+                <Model3DGroup>
+                    <DirectionalLight Color="White" Direction="-1,-1, 3" />
+                    <GeometryModel3D >
+                        <GeometryModel3D.Geometry>
+                            <MeshGeometry3D Positions="
+                                                   -10,10,0 10,10,0 10,-10,0 -10,-10,0"
+                                            TriangleIndices="0 1 3 1 2 3"/>
+                        </GeometryModel3D.Geometry>
+                        <GeometryModel3D.Material>
+                            <DiffuseMaterial Brush="{StaticResource ColorBrush1}"/>
+                        </GeometryModel3D.Material>
+                        <GeometryModel3D.Transform>
+                            <ScaleTransform3D ScaleX="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=2|0}"
+                                                              ScaleY="{Binding CoordEnabled, Converter={StaticResource coordEnabledScaleConverter}, ConverterParameter=2|1}"/>
+                        </GeometryModel3D.Transform>
+                    </GeometryModel3D>
+                </Model3DGroup>
+            </ModelVisual3D.Content>
+        </ModelVisual3D>
+    </Viewport3D>
+</UserControl>

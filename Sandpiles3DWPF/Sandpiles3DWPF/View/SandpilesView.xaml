@@ -1,0 +1,176 @@
+﻿<UserControl x:Class="Sandpiles3DWPF.View.SandpilesView"
+   xmlns = "http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+   xmlns:x = "http://schemas.microsoft.com/winfx/2006/xaml" 
+   xmlns:mc = "http://schemas.openxmlformats.org/markup-compatibility/2006" 
+   xmlns:d = "http://schemas.microsoft.com/expression/blend/2008" 
+   xmlns:local = "clr-namespace:Sandpiles3DWPF.View" 
+   mc:Ignorable = "d" Height="680" Width="707">
+
+    <Grid >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <GroupBox  Header="Render" Width="500" Height="500" Grid.Column="1" Grid.Row="0"  >
+            <StackPanel>
+
+                <Viewport3D  Width="500" Height="500" 
+                             Visibility="{Binding Visualization, Converter={StaticResource enumToBoolToVisibilityConverter}, ConverterParameter=ThreeDimensions}">
+                    <Viewport3D.Camera>
+                        <PerspectiveCamera Position="0,0,100" LookDirection="0,0,-1" FieldOfView="60" />
+                    </Viewport3D.Camera>
+
+                    <Viewport3D.Children>
+                        <ModelVisual3D >
+                            <ModelVisual3D.Content>
+                                <Model3DGroup>
+                                    <DirectionalLight Color="White" Direction="-1,-1,-3" />
+                                    <DirectionalLight Color="White" Direction="1,1,3" />
+                                </Model3DGroup>
+                            </ModelVisual3D.Content>
+                        </ModelVisual3D >
+
+                        <ModelVisual3D   Content="{Binding Render3D.Grid}"/>
+                    </Viewport3D.Children>
+                </Viewport3D>
+
+                <Image x:Name="RenderArea" Source = "{Binding Image2D, Mode=OneWay}" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                   Visibility="{Binding Visualization, Converter={StaticResource enumToInvertBoolToVisibilityConverter}, ConverterParameter=ThreeDimensions}"/>
+            </StackPanel>
+        </GroupBox>
+
+        <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right" >
+            <Slider Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Value="{Binding Rotation3DRender}" Width="128" Maximum="360" Minimum="-360" />
+            <Label Content="Iteration:" />
+            <TextBox Text = "{Binding NumberOfIterations, Mode=OneWay}" Height="18"  Width="64"/>
+            <Label Content=" Duration:" />
+            <TextBox Text = "{Binding IterationDuration, Mode=OneWay}" Height="18"  Width="64"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
+            <!--https://ovpwp.wordpress.com/2010/06/12/it-is-dangerous-to-bind-radio-buttons-to-an-enumeration-with-valueconverter/-->
+            <GroupBox  Header="Visualization" >
+                <StackPanel Orientation="Vertical" >
+                    <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="Flatten" 
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=Flatten}"                  
+                                 Command="{Binding VisualizationChangedCommand}"/>
+                    <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="Cross section" 
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=CrossSection}"                  
+                                 Command="{Binding VisualizationChangedCommand}"/>
+                    <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="3D"
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=ThreeDimensions}"
+                                 Command="{Binding VisualizationChangedCommand}"/>
+                </StackPanel >
+            </GroupBox>
+
+            <GroupBox  Header="Size" >
+                <Grid >
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource GroupedStyle}" TargetType="{x:Type TextBox}" />
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Row="0" Grid.Column="0" x:Name="sizeXLabel" Content="X" />
+                    <Label Grid.Row="1" Grid.Column="0" x:Name="sizeYLabel" Content="Y" />
+                    <Label Grid.Row="2" Grid.Column="0" x:Name="sizeZLabel" Content="Z" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text = "{Binding SizeDim[0].Value, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding SizeDim[1].Value, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding SizeDim[2].Value, Mode=TwoWay}"/>
+                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding SetSizeCommand}" Content="Set size"/>
+                </Grid >
+            </GroupBox>
+
+            <GroupBox Header="Quick menu" >
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0"  Command="{Binding QuickMenuCommand[0]}"  Content="{Binding QuickMenuCommand[0], Converter={StaticResource commandNameConverter}}"/>
+                    <Button Grid.Row="0" Grid.Column="1"  Command="{Binding QuickMenuCommand[1]}"  Content="{Binding QuickMenuCommand[1], Converter={StaticResource commandNameConverter}}"/>
+                    <Button Grid.Row="0" Grid.Column="2"  Command="{Binding QuickMenuCommand[2]}"  Content="{Binding QuickMenuCommand[2], Converter={StaticResource commandNameConverter}}"/>
+                    <Button Grid.Row="1" Grid.Column="0"   Command="{Binding QuickMenuCommand[3]}"  Content="{Binding QuickMenuCommand[3], Converter={StaticResource commandNameConverter}}"/>
+                    <Button Grid.Row="1" Grid.Column="1"   Command="{Binding QuickMenuCommand[4]}"  Content="{Binding QuickMenuCommand[4], Converter={StaticResource commandNameConverter}}"/>
+                    <Button Grid.Row="1" Grid.Column="2"   Command="{Binding QuickMenuCommand[5]}"  Content="{Binding QuickMenuCommand[5], Converter={StaticResource commandNameConverter}}"/>
+                </Grid >
+            </GroupBox>
+
+            <GroupBox Header="Advanced setup" >
+                <Grid >
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource GroupedStyle}" TargetType="{x:Type TextBox}" />
+                        <Style BasedOn="{StaticResource TextAlignLeft}" TargetType="{x:Type CheckBox}" />
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="10"/>
+                        <!-- this column drags front label to the right-->
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <CheckBox Grid.Row="0" Grid.Column="0" Content="X" IsChecked="{Binding CoordEnabled[0].Value, Mode=TwoWay}"/>
+                    <CheckBox Grid.Row="1" Grid.Column="0" Content="Y" IsChecked="{Binding CoordEnabled[1].Value, Mode=TwoWay}"/>
+                    <CheckBox Grid.Row="2" Grid.Column="0" Content="Z" IsChecked="{Binding CoordEnabled[2].Value, Mode=TwoWay}"/>
+                    <Label Grid.Row="3" Grid.Column="0" Content="Value" />
+                    <TextBox Grid.Row="0" Grid.Column="1" Text = "{Binding CoordPosition[0].StringValue, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding CoordPosition[1].StringValue, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding CoordPosition[2].StringValue, Mode=TwoWay}"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text = "{Binding SetCoordValue, Mode=TwoWay}"/>
+                    <Button Grid.Row="3" Grid.Column="2" Command="{Binding SetCoordValueCommand}" Content="Set value"/>
+
+                    <local:CoordinateGuide Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" />
+                    <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="3" Grid.ColumnSpan="2" Content="Front" VerticalAlignment="Bottom" HorizontalAlignment="Right" FontSize="8" />
+
+
+                </Grid >
+            </GroupBox>
+
+            <GroupBox Header="Controls" >
+                <Grid >
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource GroupedStyle}" TargetType="{x:Type TextBox}" />
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <Button Grid.Column="0" Grid.Row="0" Content="Start iterate" Command="{Binding StartIterationCommand}" IsEnabled="{Binding IsIterating, Converter={StaticResource invertBoolConverter}}" />
+                    <Button Grid.Column="1" Grid.Row="0" Content="Stop iterate" Command="{Binding StopIterationCommand}" IsEnabled="{Binding IsIterating}"/>
+                    <Button Grid.Column="0" Grid.Row="1" Content="Iterate one" Command="{Binding IterateOneCommand}" IsEnabled="{Binding IsIterating, Converter={StaticResource invertBoolConverter}}"/>
+
+                </Grid >
+            </GroupBox>
+        </StackPanel>
+    </Grid>
+
+</UserControl>
