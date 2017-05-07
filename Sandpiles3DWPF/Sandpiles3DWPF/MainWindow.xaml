@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:Sandpiles3DWPF"
         xmlns:myViews="clr-namespace:Sandpiles3DWPF.View"
         mc:Ignorable="d"
-        Title="Sandpiles3D" Height="800.958" Width="900.666">
+        Title="Sandpiles3D" Height="800.958" Width="900.666"
+        Icon="./sand.ico">
     <StackPanel Margin="0,10,0,0">
 
         <myViews:SandpilesView x:Name = "SandpilesViewControl" Loaded = "SanpilesViewControl_Loaded" BorderThickness="1" Width="1183" HorizontalAlignment="Left" VerticalAlignment="Top" Height="847"  />
