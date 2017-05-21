@@ -10,6 +10,34 @@ namespace Sandpiles3DWPF.Extensions
 {
     public static class MyExtensions
     {
+        public static void InvokeForAll<T>(this T[,,] array, Action<int, int, int> action)
+        {
+            for (int x = array.GetLength(0)-1; x >= 0; x--)
+            {
+                for (int y = array.GetLength(1) - 1; y >= 0; y--)
+                {
+                    for (int z = array.GetLength(2) - 1; z >= 0; z--)
+                    {
+                        action.Invoke(x, y, z);
+                    }
+                }
+            }
+        }
+
+        public static void Fill<T>(this T[,,] array, T with) // http://stackoverflow.com/questions/5943850/fastest-way-to-fill-an-array-with-a-single-value
+        {
+            for (int x = array.GetLength(0) - 1; x >= 0; x--)
+            {
+                for (int y = array.GetLength(1) - 1; y >= 0; y--)
+                {
+                    for (int z = array.GetLength(2) - 1; z >= 0; z--)
+                    {
+                        array[x, y, z] = with;
+                    }
+                }
+            }
+        }
+
         public static void AddTriangle(this Int32Collection triangles, Point3DCollection availablePoints, Point3D a, Point3D b, Point3D c)
         {
             triangles.Add(availablePoints.IndexOf(a));

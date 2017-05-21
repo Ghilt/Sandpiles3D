@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Windows.Media;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Sandpiles3DWPF.Extensions;
 
 namespace Sandpiles3DWPF.Model
 {
@@ -45,7 +46,6 @@ namespace Sandpiles3DWPF.Model
             }
             PropertyChanged += propertyChangedListener;
             AllPropertiesChanged();
-
         }
 
         public void AllPropertiesChanged()
@@ -74,28 +74,28 @@ namespace Sandpiles3DWPF.Model
             space[x, y, z] = value;
         }
 
-
         public void Iterate()
         {
             delta = new int[width, height, depth];
-            for (int x = 0; x < width; x++)
+            //space.InvokeForAll((x, y, z) => Collapse2(x, y, z)); InvokeAll seem to be a little slower than direct 3xloop
+            for (int x = width - 1; x >= 0; x--)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = height - 1; y >= 0; y--)
                 {
-                    for (int z = 0; z < depth; z++)
+                    for (int z = depth - 1; z >= 0; z--)
                     {
-                        if (space[x, y, z] > MAX_AMOUNT)
+                        if (space[x, y, z] >= MAX_AMOUNT)
                         {
                             Collapse(x, y, z);
                         }
                     }
                 }
             }
-            for (int x = 0; x < width; x++)
+            for (int x = width - 1; x >= 0; x--)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = height - 1; y >= 0; y--)
                 {
-                    for (int z = 0; z < depth; z++)
+                    for (int z = depth - 1; z >= 0; z--)
                     {
                         space[x, y, z] += delta[x, y, z];
                     }
@@ -115,6 +115,22 @@ namespace Sandpiles3DWPF.Model
             AddDelta(x, y, z + 1);
         }
 
+        /* Version easy to use with invokeAll extension method for testing, moving the if statement inside this method do have performance impact when using the regular loop
+        private void Collapse2(int x, int y, int z)
+        {
+            if (space[x, y, z] >= MAX_AMOUNT)
+            {
+                delta[x, y, z] += -MAX_AMOUNT;
+                AddDelta(x - 1, y, z);
+                AddDelta(x + 1, y, z);
+                AddDelta(x, y - 1, z);
+                AddDelta(x, y + 1, z);
+                AddDelta(x, y, z - 1);
+                AddDelta(x, y, z + 1);
+            }
+        }
+        */
+
         private void AddDelta(int x, int y, int z)
         {
             if (!IsValidCoordinate(x, y, z))
@@ -125,7 +141,7 @@ namespace Sandpiles3DWPF.Model
         }
 
         // Redo this
-        private static readonly Dictionary<int, Color> heightMap = new Dictionary<int, Color>{ 
+        private static readonly Dictionary<int, Color> heightMap = new Dictionary<int, Color>{
             { 0, Colors.SlateGray},
             { 1, Colors.Coral},
             { 2, Colors.AliceBlue},
@@ -164,7 +180,7 @@ namespace Sandpiles3DWPF.Model
                     {
                         var val = space[x, y, position];
                         val = val < 0 ? 0 : val; // values are not negative unless model values are changed(decreased) in the middle of an iteration, 
-                        crossSection[x, y] = val < heightMap.Count ? heightMap[val] : heightMap[heightMap.Count-1];
+                        crossSection[x, y] = val < heightMap.Count ? heightMap[val] : heightMap[heightMap.Count - 1];
                     }
                 }
                 return new SandpilesIterationData(iterationCounter, crossSection);
@@ -183,12 +199,12 @@ namespace Sandpiles3DWPF.Model
 
             float[] biggestValue = new float[dims];
 
-            for (int x = 0; x < width; x++)
+            for (int x = width - 1; x >= 0; x--)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = height - 1; y >= 0; y--)
                 {
                     int lastValue = space[x, y, 0];
-                    for (int z = 1; z < depth; z++) //difference counted in one direction, minor source of assymetry
+                    for (int z = depth - 1; z >= 0; z--) //difference counted in one direction, minor source of assymetry
                     {
                         int difference = Math.Abs(lastValue - space[x, y, z]);
                         for (int d = 0; d < dims; d++)
@@ -231,13 +247,13 @@ namespace Sandpiles3DWPF.Model
 
         internal bool IsStable()
         {
-            for (int x = 0; x < width; x++)
+            for (int x = width - 1; x >= 0; x--)
             {
-                for (int y = 0; y < height; y++)
+                for (int y = height - 1; y >= 0; y--)
                 {
-                    for (int z = 0; z < depth; z++)
+                    for (int z = depth - 1; z >= 0; z--)
                     {
-                        if (space[x, y, z] > MAX_AMOUNT)
+                        if (space[x, y, z] >= MAX_AMOUNT)
                         {
                             return false;
                         }
@@ -316,21 +332,4 @@ namespace Sandpiles3DWPF.Model
         }
     }
 
-
-    public static class ArrayExtensions
-    {
-        public static void Fill<T>(this T[,,] originalArray, T with) // http://stackoverflow.com/questions/5943850/fastest-way-to-fill-an-array-with-a-single-value
-        {
-            for (int x = 0; x < originalArray.GetLength(0); x++)
-            {
-                for (int y = 0; y < originalArray.GetLength(1); y++)
-                {
-                    for (int z = 0; z < originalArray.GetLength(2); z++)
-                    {
-                        originalArray[x, y, z] = with;
-                    }
-                }
-            }
-        }
-    }
 }

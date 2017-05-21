@@ -77,20 +77,20 @@ namespace Sandpiles3DWPF.ViewModel
         private ICommand[] CreateQuickCommandList()
         {
             return new ICommand[]{
-             new RelayCommand("Fill max",p => model.FillMax()),
-             new RelayCommand("Fill 7",p => model.Fill(7)),
-             new RelayCommand("Mid 7", p => model.SetPosition(model.getMidX(), model.getMidY(), model.getMidZ(), 7)),
+             new RelayCommand("Fill 5",p => model.Fill(5)),
+             new RelayCommand("Fill 6",p => model.FillMax()),
+             new RelayCommand("Mid 6", p => model.SetPosition(model.getMidX(), model.getMidY(), model.getMidZ(), 6)),
              new RelayCommand("Mid 100", p => model.SetPosition(model.getMidX(), model.getMidY(), model.getMidZ(), 100)),
-             new RelayCommand("RGB 7", p => {
-                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.1), (int)(model.depth * 0.1) }, 7);
-                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.5), (int)(model.depth * 0.5) }, 7);
-                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.9), (int)(model.depth * 0.9) }, 7);
+             new RelayCommand("RGB 6", p => {
+                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.1), (int)(model.depth * 0.1) }, 6);
+                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.5), (int)(model.depth * 0.5) }, 6);
+                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.9), (int)(model.depth * 0.9) }, 6);
              }),
-            new RelayCommand("Grid 7", p => {
-                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.1), (int)(model.depth * 0.1) }, 7);
-                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.9), (int)(model.depth * 0.3) }, 7);
-                    model.FillValues(new bool[] { true, false, true }, new int[] { (int)(model.width * 0.9), 0, (int)(model.depth * 0.7) }, 7);
-                    model.FillValues(new bool[] { true, false, true }, new int[] { (int)(model.width * 0.1), 0, (int)(model.depth * 0.9) }, 7);
+            new RelayCommand("Grid 6", p => {
+                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.1), (int)(model.depth * 0.1) }, 6);
+                    model.FillValues(new bool[] { false, true, true }, new int[] { 0, (int)(model.height * 0.9), (int)(model.depth * 0.3) }, 6);
+                    model.FillValues(new bool[] { true, false, true }, new int[] { (int)(model.width * 0.9), 0, (int)(model.depth * 0.7) }, 6);
+                    model.FillValues(new bool[] { true, false, true }, new int[] { (int)(model.width * 0.1), 0, (int)(model.depth * 0.9) }, 6);
              })};
         }
 
