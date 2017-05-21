@@ -25,6 +25,10 @@ namespace Sandpiles3DWPF.ViewModel
 
         #region Visualization control
 
+        public bool RENDER_3D_ENABLED_CONFIG {
+            get { return false; }
+        }
+
         public enum VisualizationMode
         {
             Flatten, CrossSection, ThreeDimensions
@@ -236,7 +240,10 @@ namespace Sandpiles3DWPF.ViewModel
             System.Diagnostics.Debug.WriteLine("Loading sandpiles: width(" + width + "), height(" + height + "), depth(" + depth + ")");
             model = new SandpilesCalculator(ModelPropertyChanged, width, height, depth);
             worker = new BackgroundSandpilesWorker(visualization, ModelPropertyChanged, model);
-            Create3DGridInBackground(width, height, depth);
+            if (RENDER_3D_ENABLED_CONFIG)
+            {
+                Create3DGridInBackground(width, height, depth);
+            }
         }
 
         public void ReSize(int width, int height, int depth) // Find better way to reset to initial state
