@@ -81,3 +81,8 @@ $tf/
 _ReSharper*/
 *.[Rr]e[Ss]harper
 *.DotSettings.user
+
+# Cuda
+Sandpiles3dWPF/SandpilesKernel/Debug
+Sandpiles3dWPF/SandpilesKernel/Release
+Sandpiles3dWPF/SandpilesKernel/x64
