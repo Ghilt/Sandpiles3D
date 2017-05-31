@@ -11,7 +11,7 @@ namespace Sandpiles3DWPF.Model
     {
         public int iteration { get; private set; }
         public Color[,] dim2Projection { get; private set; }
-        public int[,,] data3D { get; private set; }
+        public int[] data3D { get; private set; }
 
 
         public SandpilesIterationData(int iteration, Color[,] dim2Projection)
@@ -20,7 +20,7 @@ namespace Sandpiles3DWPF.Model
             this.dim2Projection = dim2Projection;
         }
 
-        public SandpilesIterationData(int iteration, int[,,] data3D)
+        public SandpilesIterationData(int iteration, int[] data3D)
         {
             this.iteration = iteration;
             this.data3D = data3D;   

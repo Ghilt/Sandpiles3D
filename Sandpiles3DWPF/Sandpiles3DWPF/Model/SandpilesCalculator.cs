@@ -17,8 +17,8 @@ namespace Sandpiles3DWPF.Model
         private const int MAX_AMOUNT = 6;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int[,,] space;
-        private int[,,] delta;
+        private int[] space;
+        private int[] delta;
         private float[,] multipliers;
 
         public int width { get; private set; }
@@ -32,8 +32,8 @@ namespace Sandpiles3DWPF.Model
             this.width = width;
             this.height = height;
             this.depth = depth;
-            this.space = new int[width, height, depth];
-            this.delta = new int[width, height, depth];
+            this.space = new int[width * height * depth];
+            this.delta = new int[width * height * depth];
 
             float depthF = depth - 1;
             float midPoint = depthF / 2;
@@ -71,73 +71,90 @@ namespace Sandpiles3DWPF.Model
 
         internal void SetPosition(int x, int y, int z, int value)
         {
-            space[x, y, z] = value;
+            space[x * height * depth + y * depth + z] = value;
         }
 
-        public void Iterate()
+        public void Iterate() // now using single dimension array and no method calls from inner loop 4x faster
         {
-            delta = new int[width, height, depth];
-            //space.InvokeForAll((x, y, z) => Collapse2(x, y, z)); InvokeAll seem to be a little slower than direct 3xloop
+            int hd = height * depth;
+            int whd = width * height * depth;
+            delta = new int[whd];
+            var nextIteration = new int[whd];
             for (int x = width - 1; x >= 0; x--)
             {
                 for (int y = height - 1; y >= 0; y--)
                 {
                     for (int z = depth - 1; z >= 0; z--)
                     {
-                        if (space[x, y, z] >= MAX_AMOUNT)
+                        int coord = x * hd + y * depth + z;
+                        if (space[coord] >= MAX_AMOUNT)
                         {
-                            Collapse(x, y, z);
+                            delta[coord] -= MAX_AMOUNT;
                         }
+                        int xN = x - 1;
+                        int xP = x + 1;
+                        int yN = y - 1;
+                        int yP = y + 1;
+                        int zN = z - 1;
+                        int zP = z + 1;
+
+                        if (xN >= 0)
+                        { // possible optimization as the X term is the biggest we do not need to check it 
+                            int coordL = xN * hd + y * depth + z;
+                            if (coordL >= 0 && space[coordL] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        if (xP < width)
+                        {
+                            int coordR = xP * hd + y * depth + z;
+                            if (coordR < whd && space[coordR] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        if (yN >= 0)
+                        {
+                            int coordD = x * hd + yN * depth + z;
+                            if (coordD >= 0 && space[coordD] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        if (yP < height)
+                        {
+                            int coordU = x * hd + yP * depth + z;
+                            if (coordU < whd && space[coordU] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        if (zN >= 0)
+                        {
+                            int coordB = x * hd + y * depth + zN;
+                            if (coordB >= 0 && space[coordB] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        if (zP < depth)
+                        {
+                            int coordF = x * hd + y * depth + zP;
+                            if (coordF < whd && space[coordF] >= MAX_AMOUNT)
+                            {
+                                delta[coord]++;
+                            }
+                        }
+                        nextIteration[coord] = space[coord] + delta[coord];
                     }
                 }
             }
-            for (int x = width - 1; x >= 0; x--)
+            for (int i = 0; i < whd; i++)
             {
-                for (int y = height - 1; y >= 0; y--)
-                {
-                    for (int z = depth - 1; z >= 0; z--)
-                    {
-                        space[x, y, z] += delta[x, y, z];
-                    }
-                }
+                space[i] = nextIteration[i];
             }
             iterationCounter++;
-        }
-
-        private void Collapse(int x, int y, int z)
-        {
-            delta[x, y, z] += -MAX_AMOUNT;
-            AddDelta(x - 1, y, z);
-            AddDelta(x + 1, y, z);
-            AddDelta(x, y - 1, z);
-            AddDelta(x, y + 1, z);
-            AddDelta(x, y, z - 1);
-            AddDelta(x, y, z + 1);
-        }
-
-        /* Version easy to use with invokeAll extension method for testing, moving the if statement inside this method do have performance impact when using the regular loop
-        private void Collapse2(int x, int y, int z)
-        {
-            if (space[x, y, z] >= MAX_AMOUNT)
-            {
-                delta[x, y, z] += -MAX_AMOUNT;
-                AddDelta(x - 1, y, z);
-                AddDelta(x + 1, y, z);
-                AddDelta(x, y - 1, z);
-                AddDelta(x, y + 1, z);
-                AddDelta(x, y, z - 1);
-                AddDelta(x, y, z + 1);
-            }
-        }
-        */
-
-        private void AddDelta(int x, int y, int z)
-        {
-            if (!IsValidCoordinate(x, y, z))
-            {
-                return;
-            }
-            delta[x, y, z]++;
         }
 
         // Redo this
@@ -178,7 +195,7 @@ namespace Sandpiles3DWPF.Model
                 {
                     for (int y = 0; y < height; y++)
                     {
-                        var val = space[x, y, position];
+                        var val = space[x * height * depth + y * depth + position];
                         val = val < 0 ? 0 : val; // values are not negative unless model values are changed(decreased) in the middle of an iteration, 
                         crossSection[x, y] = val < heightMap.Count ? heightMap[val] : heightMap[heightMap.Count - 1];
                     }
@@ -191,7 +208,7 @@ namespace Sandpiles3DWPF.Model
             }
         }
 
-        internal SandpilesIterationData Get2DProjection()
+        internal SandpilesIterationData Get2DProjection() // move method to helper class
         {
             int dims = 3;
 
@@ -203,15 +220,15 @@ namespace Sandpiles3DWPF.Model
             {
                 for (int y = height - 1; y >= 0; y--)
                 {
-                    int lastValue = space[x, y, 0];
+                    int lastValue = space[x * height * depth + y * depth + 0];
                     for (int z = depth - 1; z >= 0; z--) //difference counted in one direction, minor source of assymetry
                     {
-                        int difference = Math.Abs(lastValue - space[x, y, z]);
+                        int difference = Math.Abs(lastValue - space[x * height * depth + y * depth + z]);
                         for (int d = 0; d < dims; d++)
                         {
                             flatten[x, y, d] += difference * multipliers[z, d];
                         }
-                        lastValue = space[x, y, z];
+                        lastValue = space[x * height * depth + y * depth + z];
                     }
 
                     for (int d = 0; d < dims; d++)
@@ -253,7 +270,7 @@ namespace Sandpiles3DWPF.Model
                 {
                     for (int z = depth - 1; z >= 0; z--)
                     {
-                        if (space[x, y, z] >= MAX_AMOUNT)
+                        if (space[x * height * depth + y * depth + z] >= MAX_AMOUNT)
                         {
                             return false;
                         }
@@ -325,7 +342,7 @@ namespace Sandpiles3DWPF.Model
                 {
                     for (int z = dimensionIterationInterval[2, 0]; z < dimensionIterationInterval[2, 1]; z++)
                     {
-                        space[x, y, z] = value;
+                        space[x * height * depth + y * depth + z] = value;
                     }
                 }
             }

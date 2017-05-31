@@ -12,7 +12,7 @@ namespace Sandpiles3DWPF.Extensions
     {
         public static void InvokeForAll<T>(this T[,,] array, Action<int, int, int> action)
         {
-            for (int x = array.GetLength(0)-1; x >= 0; x--)
+            for (int x = array.GetLength(0) - 1; x >= 0; x--)
             {
                 for (int y = array.GetLength(1) - 1; y >= 0; y--)
                 {
@@ -35,6 +35,14 @@ namespace Sandpiles3DWPF.Extensions
                         array[x, y, z] = with;
                     }
                 }
+            }
+        }
+
+        public static void Fill<T>(this T[] array, T with) 
+        {
+            for (int i = array.Length - 1; i >= 0; i--)
+            {
+                array[i] = with;
             }
         }
 

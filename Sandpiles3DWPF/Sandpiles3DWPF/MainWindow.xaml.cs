@@ -31,7 +31,7 @@ namespace Sandpiles3DWPF
         private void SanpilesViewControl_Loaded(object sender, RoutedEventArgs e)
         {
             ViewModel.SandpilesViewModel sandpilesViewModel = new ViewModel.SandpilesViewModel();
-            sandpilesViewModel.LoadSandpiles(21, 21, 21);
+            sandpilesViewModel.LoadSandpiles(101, 101, 21);
 
             SandpilesViewControl.DataContext = sandpilesViewModel;
             

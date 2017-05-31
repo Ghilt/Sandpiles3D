@@ -19,7 +19,7 @@ namespace Sandpiles3DWPF.ViewModel
         private Vector3DCollection normalVectors;
 
         public Model3DGroup Grid { private set; get; }
-        private GeometryModel3D[,,] cubes;
+        private GeometryModel3D[] cubes;
         private ScaleTransform3D hide;
         private int width;
         private int height;
@@ -31,7 +31,7 @@ namespace Sandpiles3DWPF.ViewModel
             this.height = height;
             this.depth = depth;
             Grid = new Model3DGroup();
-            cubes = new GeometryModel3D[width, height, depth];
+            cubes = new GeometryModel3D[width * height * depth];
         }
 
         public void Initiate()
@@ -105,6 +105,8 @@ namespace Sandpiles3DWPF.ViewModel
             float x = xPos * (dx + spacing);
             float y = yPos * (dy + spacing);
             float z = zPos * (dz + spacing);
+            int coord = xPos * height * depth + yPos * depth + zPos;
+
 
             Point3D A = new Point3D(x, y, z);
             Point3D B = new Point3D(x + dx, y, z);
@@ -115,7 +117,7 @@ namespace Sandpiles3DWPF.ViewModel
             Point3D G = new Point3D(x, y + dy, z + dz);
             Point3D H = new Point3D(x + dx, y + dy, z + dz);
 
-            cubes[xPos, yPos, zPos] = new GeometryModel3D();
+            cubes[coord] = new GeometryModel3D();
             MeshGeometry3D myMeshGeometry3D = new MeshGeometry3D();
             Point3DCollection points = new Point3DCollection();
             myMeshGeometry3D.Positions = points;
@@ -138,10 +140,10 @@ namespace Sandpiles3DWPF.ViewModel
 
             //myMeshGeometry3D.Normals = normalVectors;
             //myMeshGeometry3D.TextureCoordinates = textureCoordinates;
-            cubes[xPos, yPos, zPos].Geometry = myMeshGeometry3D;
-            cubes[xPos, yPos, zPos].Material = material;
-            cubes[xPos, yPos, zPos].Freeze(); // this line incredibly important for speed
-            return cubes[xPos, yPos, zPos];
+            cubes[coord].Geometry = myMeshGeometry3D;
+            cubes[coord].Material = material;
+            cubes[coord].Freeze(); // this line incredibly important for speed
+            return cubes[coord];
         }
 
         internal void Freeze()
@@ -160,10 +162,11 @@ namespace Sandpiles3DWPF.ViewModel
                 for (int x = 0; x < width; x++) //re-map
                 {
                     for (int y = 0; y < height; y++)
-                    {   
+                    {
                         for (int z = 0; z < depth; z++)
                         {
-                            cubes[x, y, z] = m[i] as GeometryModel3D;
+                            int coord = x * height * depth + y * depth + z;
+                            cubes[coord] = m[i] as GeometryModel3D;
                             i++;
                         }
                     }
@@ -172,7 +175,7 @@ namespace Sandpiles3DWPF.ViewModel
             }
         }
 
-        internal void Update(int[,,] data3D)
+        internal void Update(int[] data3D)
         {
             for (int x = 0; x < data3D.GetLength(0); x++)
             {
@@ -180,13 +183,14 @@ namespace Sandpiles3DWPF.ViewModel
                 {
                     for (int z = 0; z < data3D.GetLength(2); z++)
                     {
-                        if (data3D[x,y,z] > 0)
+                        int coord = x * height * depth + y * depth + z;
+                        if (data3D[coord] > 0)
                         {
-                            cubes[x, y, z].Transform = null;
+                            cubes[coord].Transform = null;
                         }
                         else
                         {
-                            cubes[x, y, z].Transform = hide;
+                            cubes[coord].Transform = hide;
                         }
                     }
                 }

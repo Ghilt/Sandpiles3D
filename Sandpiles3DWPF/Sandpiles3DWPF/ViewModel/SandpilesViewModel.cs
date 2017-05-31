@@ -346,7 +346,7 @@ namespace Sandpiles3DWPF.ViewModel
             }
         }
 
-        private void Update3DRender(int[,,] data3D)
+        private void Update3DRender(int[] data3D)
         {
             render3D.Update(data3D);
         }

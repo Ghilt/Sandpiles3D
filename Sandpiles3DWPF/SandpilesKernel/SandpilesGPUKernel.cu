@@ -157,7 +157,7 @@ extern "C" {
 		int y = blockDim.y * blockIdx.y + threadIdx.y;
 		int z = 0;
 		while (z < n) {
-			int coord = x * n * n + y * n + z;
+			int coord = x * n2 + y * n + z;
 
 			if (origin[coord] >= maxVal)
 			{
@@ -169,9 +169,8 @@ extern "C" {
 			int yP = y + 1;
 			int zN = z - 1;
 			int zP = z + 1;
-			//these calculated unecessarily if inbounds is false, possible optimization
 
-			if (xN >= 0) {
+			if (xN >= 0) { // possible optimization as the X term is the biggest we do not need to check it 
 				int coordL = xN * n2 + y * n + z;
 				if (coordL >= 0 && origin[coordL] >= maxVal) {
 					delta[coord]++;
