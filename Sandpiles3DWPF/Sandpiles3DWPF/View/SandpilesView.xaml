@@ -45,7 +45,7 @@
         </GroupBox>
 
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right" >
-            <Slider Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Value="{Binding Rotation3DRender}" Width="128" Maximum="360" Minimum="-360" IsEnabled="{Binding RENDER_3D_ENABLED_CONFIG}" />
+            <Slider Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Value="{Binding Rotation3DRender}" Width="128" Maximum="360" Minimum="-360" IsEnabled="{Binding CONFIG_RENDER_3D_ENABLED}" />
             <Label Content="Iteration:" />
             <TextBox Text = "{Binding NumberOfIterations, Mode=OneWay}" Height="18"  Width="64"/>
             <Label Content=" Duration:" />
@@ -65,7 +65,7 @@
                     <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="3D"
                                  IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=ThreeDimensions}"
                                  Command="{Binding VisualizationChangedCommand}"
-                                 IsEnabled="{Binding RENDER_3D_ENABLED_CONFIG}"/>
+                                 IsEnabled="{Binding CONFIG_RENDER_3D_ENABLED}"/>
                 </StackPanel >
             </GroupBox>
 

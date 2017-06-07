@@ -56,18 +56,20 @@ namespace Sandpiles3DWPF.Model
 
         internal void PerformSingleIteration(object sender, DoWorkEventArgs e)
         {
+            PrepareForWork();
             BackgroundWorker worker = (BackgroundWorker)sender;
             var watch = System.Diagnostics.Stopwatch.StartNew();
             model.Iterate();
             watch.Stop();
             lastIterationDuration = watch.ElapsedMilliseconds;
             e.Result = getIterationReturnData();
+            TearDownAfterWorkPerformed();
         }
 
         private void PerformContinousIteration(object sender, DoWorkEventArgs e)
         {
+            PrepareForWork();
             BackgroundWorker worker = (BackgroundWorker)sender;
-
             while (!worker.CancellationPending)
             {
                 var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -80,6 +82,7 @@ namespace Sandpiles3DWPF.Model
                     System.Threading.Thread.Sleep(100);
                 }
             }
+            TearDownAfterWorkPerformed();
             OnPropertyChanged(PROPERTY_CHANGED_CONTINUOUS_ITERATION_STOPPED);
             workerStoppedClearCallbacks();
             e.Cancel = true; // what does this do?
@@ -132,5 +135,8 @@ namespace Sandpiles3DWPF.Model
         {
             visualizationMode = mode;
         }
+
+        public virtual void PrepareForWork() { /*Used in subclass*/ } 
+        public virtual void TearDownAfterWorkPerformed() { /*Used in subclass*/ }
     }
 }

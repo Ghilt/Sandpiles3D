@@ -901,15 +901,15 @@ BB4_1:
 BB4_2:
 	.loc	1 160 1
 tmp58:
-	mov.u32 	%r34, n;
+	mov.u32 	%r34, n2;
 	cvta.const.u32 	%r35, %r34;
 	ld.u32 	%r36, [%r35];
 	mul.lo.s32 	%r37, %r1, %r36;
-	ld.u32 	%r38, [%r35];
-	mul.lo.s32 	%r39, %r37, %r38;
-	ld.u32 	%r40, [%r35];
+	mov.u32 	%r38, n;
+	cvta.const.u32 	%r39, %r38;
+	ld.u32 	%r40, [%r39];
 	mul.lo.s32 	%r41, %r2, %r40;
-	add.s32 	%r42, %r39, %r41;
+	add.s32 	%r42, %r37, %r41;
 	add.s32 	%r5, %r42, %r197;
 tmp59:
 	.loc	1 162 1
@@ -956,14 +956,14 @@ tmp66:
 	.loc	1 171 1
 	add.s32 	%r11, %r197, 1;
 tmp67:
-	.loc	1 174 1
+	.loc	1 173 1
 	setp.ge.s32	%p17, %r6, 0;
 	not.pred 	%p18, %p17;
 	@%p18 bra 	BB4_10;
 	bra.uni 	BB4_5;
 
 BB4_5:
-	.loc	1 175 1
+	.loc	1 174 1
 tmp68:
 	mov.u32 	%r56, n2;
 	cvta.const.u32 	%r57, %r56;
@@ -976,7 +976,7 @@ tmp68:
 	add.s32 	%r64, %r59, %r63;
 	add.s32 	%r12, %r64, %r197;
 tmp69:
-	.loc	1 176 1
+	.loc	1 175 1
 	setp.ge.s32	%p20, %r12, 0;
 	mov.pred 	%p53, 0;
 	not.pred 	%p21, %p20;
@@ -998,7 +998,7 @@ BB4_7:
 	bra.uni 	BB4_8;
 
 BB4_8:
-	.loc	1 177 1
+	.loc	1 176 1
 tmp70:
 	shl.b32 	%r71, %r5, 2;
 	add.s32 	%r72, %r20, %r71;
@@ -1010,7 +1010,7 @@ tmp71:
 BB4_9:
 
 BB4_10:
-	.loc	1 180 1
+	.loc	1 179 1
 	mov.u32 	%r75, n;
 	cvta.const.u32 	%r76, %r75;
 	ld.u32 	%r77, [%r76];
@@ -1020,7 +1020,7 @@ BB4_10:
 	bra.uni 	BB4_11;
 
 BB4_11:
-	.loc	1 181 1
+	.loc	1 180 1
 tmp72:
 	mov.u32 	%r78, n2;
 	cvta.const.u32 	%r79, %r78;
@@ -1033,7 +1033,7 @@ tmp72:
 	add.s32 	%r86, %r81, %r85;
 	add.s32 	%r13, %r86, %r197;
 tmp73:
-	.loc	1 182 1
+	.loc	1 181 1
 	mov.u32 	%r87, n3;
 	cvta.const.u32 	%r88, %r87;
 	ld.u32 	%r89, [%r88];
@@ -1058,7 +1058,7 @@ BB4_13:
 	bra.uni 	BB4_14;
 
 BB4_14:
-	.loc	1 183 1
+	.loc	1 182 1
 tmp74:
 	shl.b32 	%r96, %r5, 2;
 	add.s32 	%r97, %r20, %r96;
@@ -1070,14 +1070,14 @@ tmp75:
 BB4_15:
 
 BB4_16:
-	.loc	1 186 1
+	.loc	1 185 1
 	setp.ge.s32	%p29, %r8, 0;
 	not.pred 	%p30, %p29;
 	@%p30 bra 	BB4_22;
 	bra.uni 	BB4_17;
 
 BB4_17:
-	.loc	1 187 1
+	.loc	1 186 1
 tmp76:
 	mov.u32 	%r100, n2;
 	cvta.const.u32 	%r101, %r100;
@@ -1090,7 +1090,7 @@ tmp76:
 	add.s32 	%r108, %r103, %r107;
 	add.s32 	%r14, %r108, %r197;
 tmp77:
-	.loc	1 188 1
+	.loc	1 187 1
 	setp.ge.s32	%p32, %r14, 0;
 	mov.pred 	%p55, 0;
 	not.pred 	%p33, %p32;
@@ -1112,7 +1112,7 @@ BB4_19:
 	bra.uni 	BB4_20;
 
 BB4_20:
-	.loc	1 189 1
+	.loc	1 188 1
 tmp78:
 	shl.b32 	%r115, %r5, 2;
 	add.s32 	%r116, %r20, %r115;
@@ -1124,7 +1124,7 @@ tmp79:
 BB4_21:
 
 BB4_22:
-	.loc	1 192 1
+	.loc	1 191 1
 	mov.u32 	%r119, n;
 	cvta.const.u32 	%r120, %r119;
 	ld.u32 	%r121, [%r120];
@@ -1134,7 +1134,7 @@ BB4_22:
 	bra.uni 	BB4_23;
 
 BB4_23:
-	.loc	1 193 1
+	.loc	1 192 1
 tmp80:
 	mov.u32 	%r122, n2;
 	cvta.const.u32 	%r123, %r122;
@@ -1147,7 +1147,7 @@ tmp80:
 	add.s32 	%r130, %r125, %r129;
 	add.s32 	%r15, %r130, %r197;
 tmp81:
-	.loc	1 194 1
+	.loc	1 193 1
 	mov.u32 	%r131, n3;
 	cvta.const.u32 	%r132, %r131;
 	ld.u32 	%r133, [%r132];
@@ -1172,7 +1172,7 @@ BB4_25:
 	bra.uni 	BB4_26;
 
 BB4_26:
-	.loc	1 195 1
+	.loc	1 194 1
 tmp82:
 	shl.b32 	%r140, %r5, 2;
 	add.s32 	%r141, %r20, %r140;
@@ -1184,14 +1184,14 @@ tmp83:
 BB4_27:
 
 BB4_28:
-	.loc	1 198 1
+	.loc	1 197 1
 	setp.ge.s32	%p41, %r10, 0;
 	not.pred 	%p42, %p41;
 	@%p42 bra 	BB4_34;
 	bra.uni 	BB4_29;
 
 BB4_29:
-	.loc	1 199 1
+	.loc	1 198 1
 tmp84:
 	mov.u32 	%r144, n2;
 	cvta.const.u32 	%r145, %r144;
@@ -1204,7 +1204,7 @@ tmp84:
 	add.s32 	%r152, %r147, %r151;
 	add.s32 	%r16, %r152, %r10;
 tmp85:
-	.loc	1 200 1
+	.loc	1 199 1
 	setp.ge.s32	%p44, %r16, 0;
 	mov.pred 	%p57, 0;
 	not.pred 	%p45, %p44;
@@ -1226,7 +1226,7 @@ BB4_31:
 	bra.uni 	BB4_32;
 
 BB4_32:
-	.loc	1 201 1
+	.loc	1 200 1
 tmp86:
 	shl.b32 	%r159, %r5, 2;
 	add.s32 	%r160, %r20, %r159;
@@ -1238,7 +1238,7 @@ tmp87:
 BB4_33:
 
 BB4_34:
-	.loc	1 204 1
+	.loc	1 203 1
 	mov.u32 	%r163, n;
 	cvta.const.u32 	%r164, %r163;
 	ld.u32 	%r165, [%r164];
@@ -1248,7 +1248,7 @@ BB4_34:
 	bra.uni 	BB4_35;
 
 BB4_35:
-	.loc	1 205 1
+	.loc	1 204 1
 tmp88:
 	mov.u32 	%r166, n2;
 	cvta.const.u32 	%r167, %r166;
@@ -1261,7 +1261,7 @@ tmp88:
 	add.s32 	%r174, %r169, %r173;
 	add.s32 	%r17, %r174, %r11;
 tmp89:
-	.loc	1 206 1
+	.loc	1 205 1
 	mov.u32 	%r175, n3;
 	cvta.const.u32 	%r176, %r175;
 	ld.u32 	%r177, [%r176];
@@ -1286,7 +1286,7 @@ BB4_37:
 	bra.uni 	BB4_38;
 
 BB4_38:
-	.loc	1 207 1
+	.loc	1 206 1
 tmp90:
 	shl.b32 	%r184, %r5, 2;
 	add.s32 	%r185, %r20, %r184;
@@ -1298,7 +1298,7 @@ tmp91:
 BB4_39:
 
 BB4_40:
-	.loc	1 210 1
+	.loc	1 209 1
 	shl.b32 	%r188, %r5, 2;
 	add.s32 	%r189, %r19, %r188;
 	ld.u32 	%r190, [%r189];
@@ -1309,20 +1309,20 @@ BB4_40:
 	shl.b32 	%r195, %r5, 2;
 	add.s32 	%r196, %r21, %r195;
 	st.u32 	[%r196], %r194;
-	.loc	1 212 1
+	.loc	1 211 1
 	add.s32 	%r197, %r197, 1;
 tmp92:
 	bra.uni 	BB4_1;
 tmp93:
 
 BB4_41:
-	.loc	1 214 2
+	.loc	1 213 2
 	ret;
 tmp94:
 func_end4:
 }
 
-	.file	1 "D:/Files/Code/VisualStudio/Sandpiles3D/Sandpiles3DWPF/SandpilesKernel/SandpilesGPUKernel.cu", 1495474330, 5927
+	.file	1 "D:/Files/Code/VisualStudio/Sandpiles3D/Sandpiles3DWPF/SandpilesKernel/SandpilesGPUKernel.cu", 1496253893, 5926
 
 .section .debug_info {
  .b32 2778
@@ -3186,7 +3186,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 175
+ .b32 174
  .b32 234
  .b8 6
  .b8 144
@@ -3217,7 +3217,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 181
+ .b32 180
  .b32 234
  .b8 6
  .b8 144
@@ -3248,7 +3248,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 187
+ .b32 186
  .b32 234
  .b8 6
  .b8 144
@@ -3279,7 +3279,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 193
+ .b32 192
  .b32 234
  .b8 6
  .b8 144
@@ -3310,7 +3310,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 199
+ .b32 198
  .b32 234
  .b8 6
  .b8 144
@@ -3341,7 +3341,7 @@ func_end4:
 
  .b8 0
  .b32 1
- .b32 205
+ .b32 204
  .b32 234
  .b8 6
  .b8 144

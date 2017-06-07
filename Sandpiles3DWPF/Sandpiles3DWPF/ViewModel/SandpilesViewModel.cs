@@ -1,5 +1,6 @@
 ﻿using Sandpiles3DWPF.Extensions;
 using Sandpiles3DWPF.Model;
+using Sandpiles3DWPF.Model.Cuda;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -25,9 +26,19 @@ namespace Sandpiles3DWPF.ViewModel
 
         #region Visualization control
 
-        public bool RENDER_3D_ENABLED_CONFIG {
+        public bool CONFIG_FORCE_USE_CUDA
+        {
             get { return false; }
         }
+
+        public bool CONFIG_RENDER_3D_ENABLED
+        {
+            get { return false; }
+        }
+
+        #endregion //Configuration
+
+        #region Visualization control
 
         public enum VisualizationMode
         {
@@ -238,9 +249,17 @@ namespace Sandpiles3DWPF.ViewModel
         public void LoadSandpiles(int width, int height, int depth)
         {
             System.Diagnostics.Debug.WriteLine("Loading sandpiles: width(" + width + "), height(" + height + "), depth(" + depth + ")");
-            model = new SandpilesCalculator(ModelPropertyChanged, width, height, depth);
-            worker = new BackgroundSandpilesWorker(visualization, ModelPropertyChanged, model);
-            if (RENDER_3D_ENABLED_CONFIG)
+            if (CONFIG_FORCE_USE_CUDA)
+            {
+                model = new SandpilesCalculatorCuda(ModelPropertyChanged, width, height, depth);
+                worker = new BackgroundSandpilesWorkerCuda(visualization, ModelPropertyChanged, model as SandpilesCalculatorCuda);
+            } else
+            {
+                model = new SandpilesCalculator(ModelPropertyChanged, width, height, depth);
+                worker = new BackgroundSandpilesWorker(visualization, ModelPropertyChanged, model as SandpilesCalculator);
+            }          
+
+            if (CONFIG_RENDER_3D_ENABLED)
             {
                 Create3DGridInBackground(width, height, depth);
             }

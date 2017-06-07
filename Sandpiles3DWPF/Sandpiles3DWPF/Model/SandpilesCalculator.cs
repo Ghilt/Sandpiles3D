@@ -14,11 +14,11 @@ namespace Sandpiles3DWPF.Model
 {
     public class SandpilesCalculator : INotifyPropertyChanged
     {
-        private const int MAX_AMOUNT = 6;
+        internal const int MAX_AMOUNT = 6;
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private int[] space;
-        private int[] delta;
+        public int[] space { get; set; } // So ugly i wanna cry
+        public int[] delta { get; set; } // refactor everything so i do not have to give these out
         private float[,] multipliers;
 
         public int width { get; private set; }
@@ -53,9 +53,8 @@ namespace Sandpiles3DWPF.Model
             OnPropertyChanged();
         }
 
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "") //This system is pretty un-utilized and unnecessary, should do consts instead
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            //invoke if not null
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -74,7 +73,7 @@ namespace Sandpiles3DWPF.Model
             space[x * height * depth + y * depth + z] = value;
         }
 
-        public void Iterate() // now using single dimension array and no method calls from inner loop 4x faster
+        public virtual void Iterate() // now using single dimension array and no method calls from inner loop 4x faster
         {
             int hd = height * depth;
             int whd = width * height * depth;
