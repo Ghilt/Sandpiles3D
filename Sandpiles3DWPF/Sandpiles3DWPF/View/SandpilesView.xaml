@@ -16,9 +16,8 @@
             <ColumnDefinition Width="Auto"/>
         </Grid.ColumnDefinitions>
 
-        <GroupBox  Header="Render" Width="500" Height="500" Grid.Column="1" Grid.Row="0"  >
+        <GroupBox  Header="Render" Width="500" Height="510" Grid.Column="1" Grid.Row="0"  >
             <StackPanel>
-
                 <Viewport3D  Width="500" Height="500" 
                              Visibility="{Binding Visualization, Converter={StaticResource enumToBoolToVisibilityConverter}, ConverterParameter=ThreeDimensions}">
                     <Viewport3D.Camera>
@@ -39,7 +38,7 @@
                     </Viewport3D.Children>
                 </Viewport3D>
 
-                <Image x:Name="RenderArea" Source = "{Binding Image2D, Mode=OneWay}" RenderOptions.BitmapScalingMode="NearestNeighbor"
+                <Image x:Name="RenderArea" Source="{Binding Image2D, Mode=OneWay}" RenderOptions.BitmapScalingMode="NearestNeighbor"
                    Visibility="{Binding Visualization, Converter={StaticResource enumToInvertBoolToVisibilityConverter}, ConverterParameter=ThreeDimensions}"/>
             </StackPanel>
         </GroupBox>
@@ -47,9 +46,9 @@
         <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Orientation="Horizontal" HorizontalAlignment="Right" >
             <Slider Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Value="{Binding Rotation3DRender}" Width="128" Maximum="360" Minimum="-360" IsEnabled="{Binding CONFIG_RENDER_3D_ENABLED}" />
             <Label Content="Iteration:" />
-            <TextBox Text = "{Binding NumberOfIterations, Mode=OneWay}" Height="18"  Width="64"/>
+            <TextBox Text="{Binding NumberOfIterations, Mode=OneWay}" Height="18"  Width="64"/>
             <Label Content=" Duration:" />
-            <TextBox Text = "{Binding IterationDuration, Mode=OneWay}" Height="18"  Width="64"/>
+            <TextBox Text="{Binding IterationDuration, Mode=OneWay}" Height="18"  Width="64"/>
         </StackPanel>
 
         <StackPanel Grid.Row="0" Grid.Column="0" Grid.RowSpan="2">
