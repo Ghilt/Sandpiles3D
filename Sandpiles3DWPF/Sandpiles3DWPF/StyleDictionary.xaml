@@ -23,6 +23,15 @@
         <Setter Property="BorderBrush" Value="#739969" />
     </Style>
 
+    <Style TargetType="TabControl">
+        <Setter Property="BorderBrush" Value="#739969" />
+    </Style>
+
+    <Style TargetType="TabItem">
+        <Setter Property="BorderBrush" Value="#739969" />
+        <Setter Property="Background" Value="#dfecdc" />
+    </Style>
+
     <Style x:Key="TextAlignLeft" TargetType="CheckBox">
         <Style.Resources>
             <Style TargetType="Path">

@@ -8,7 +8,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     
     <TabControl>
-        <TabItem Header="General">
+        <TabItem Header="CPU">
             <GroupBox  Header="Size" >
                 <Grid >
                     <Grid.Resources>
@@ -24,17 +24,50 @@
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
-                    <Label Grid.Row="0" Grid.Column="0" x:Name="sizeXLabel" Content="X" />
-                    <Label Grid.Row="1" Grid.Column="0" x:Name="sizeYLabel" Content="Y" />
-                    <Label Grid.Row="2" Grid.Column="0" x:Name="sizeZLabel" Content="Z" />
+                    <Label Grid.Row="0" Grid.Column="0" Content="X" />
+                    <Label Grid.Row="1" Grid.Column="0" Content="Y" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Z" />
                     <TextBox Grid.Row="0" Grid.Column="1" Text = "{Binding SizeDim[0].Value, Mode=TwoWay}"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding SizeDim[1].Value, Mode=TwoWay}"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding SizeDim[2].Value, Mode=TwoWay}"/>
-                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding SetSizeCommand}" Content="Set size"/>
+                    <Button Grid.Row="2" Grid.Column="2" Command="{Binding SetSizeCommand}" CommandParameter="CPU" Content="Set size"/>
                 </Grid >
             </GroupBox>
         </TabItem>
-        <TabItem Header="Security" />
-        <TabItem Header="Details" />
+        <TabItem Header="CUDA" >
+            <GroupBox  Header="Size" >
+                <Grid >
+                    <Grid.Resources>
+                        <Style BasedOn="{StaticResource GroupedStyle}" TargetType="{x:Type TextBox}" />
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <ComboBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3">
+                        <ComboBoxItem>64</ComboBoxItem>
+                        <ComboBoxItem IsSelected="True">128</ComboBoxItem>
+                        <ComboBoxItem>256</ComboBoxItem>
+                    </ComboBox>
+
+                    <Label Grid.Row="1" Grid.Column="0" Content="X" />
+                    <Label Grid.Row="2" Grid.Column="0" Content="Y" />
+                    <Label Grid.Row="3" Grid.Column="0" Content="Z" />
+                    <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding SizeDim[0].Value, Mode=TwoWay}" IsEnabled="False"/>
+                    <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding SizeDim[1].Value, Mode=TwoWay}" IsEnabled="False"/>
+                    <TextBox Grid.Row="3" Grid.Column="1" Text = "{Binding SizeDim[2].Value, Mode=TwoWay}" IsEnabled="False"/>
+                    <Label Grid.Row="3" Grid.Column="2" Content="TODO" />
+                    <!--<Button Grid.Row="3" Grid.Column="2" Command="{Binding SetSizeCommand}" CommandParameter="CPU" Content="Set size"/>-->
+                </Grid >
+            </GroupBox>
+        </TabItem>
     </TabControl>
 </UserControl>
