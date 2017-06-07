@@ -83,6 +83,24 @@
     <Compile Include="ViewModel\ObservableField.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\SandpilesViewModel.cs" />
+    <Compile Include="View\IterationControl.xaml.cs">
+      <DependentUpon>IterationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\QuickMenuControl.xaml.cs">
+      <DependentUpon>QuickMenuControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AdvancedModelSetupControl.xaml.cs">
+      <DependentUpon>AdvancedModelSetupControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VisualizationControl.xaml.cs">
+      <DependentUpon>VisualizationControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ModelSettingsControl.xaml.cs">
+      <DependentUpon>ModelSettingsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\RenderAreaView.xaml.cs">
+      <DependentUpon>RenderAreaView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CoordinateGuide.xaml.cs">
       <DependentUpon>CoordinateGuide.xaml</DependentUpon>
     </Compile>
@@ -104,6 +122,30 @@
     <Page Include="StyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\IterationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\QuickMenuControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\AdvancedModelSetupControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VisualizationControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ModelSettingsControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\RenderAreaView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\CoordinateGuide.xaml">
       <SubType>Designer</SubType>

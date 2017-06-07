@@ -6,11 +6,12 @@
         xmlns:local="clr-namespace:Sandpiles3DWPF"
         xmlns:myViews="clr-namespace:Sandpiles3DWPF.View"
         mc:Ignorable="d"
-        Title="Sandpiles3D" Height="800.958" Width="900.666"
+        SizeToContent="WidthAndHeight"
+        Title="Sandpiles3D"
         Icon="./sand.ico">
-    <StackPanel Margin="0,10,0,0">
+    <StackPanel>
 
-        <myViews:SandpilesView x:Name = "SandpilesViewControl" Loaded = "SanpilesViewControl_Loaded" BorderThickness="1" Width="1183" HorizontalAlignment="Left" VerticalAlignment="Top" Height="847"  />
+        <myViews:SandpilesView x:Name = "SandpilesViewControl" Loaded = "SanpilesViewControl_Loaded" />
 
     </StackPanel>
 </Window>

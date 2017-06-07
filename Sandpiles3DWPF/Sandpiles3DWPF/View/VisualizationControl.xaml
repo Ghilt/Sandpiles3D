@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="Sandpiles3DWPF.View.VisualizationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sandpiles3DWPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <!--https://ovpwp.wordpress.com/2010/06/12/it-is-dangerous-to-bind-radio-buttons-to-an-enumeration-with-valueconverter/-->
+    <GroupBox  Header="Visualization" >
+        <StackPanel Orientation="Vertical" >
+            <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="Flatten" 
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=Flatten}"                  
+                                 Command="{Binding VisualizationChangedCommand}"/>
+            <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="Cross section" 
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=CrossSection}"                  
+                                 Command="{Binding VisualizationChangedCommand}"/>
+            <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="3D"
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=ThreeDimensions}"
+                                 Command="{Binding VisualizationChangedCommand}"
+                                 IsEnabled="{Binding CONFIG_RENDER_3D_ENABLED}"/>
+        </StackPanel >
+    </GroupBox>
+</UserControl>

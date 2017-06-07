@@ -15,9 +15,7 @@ using System.Windows.Shapes;
 
 namespace Sandpiles3DWPF.View
 {
-    /// <summary>
-    /// Interaction logic for StudentView.xaml
-    /// </summary>
+
     public partial class SandpilesView : UserControl
     {
         public SandpilesView()

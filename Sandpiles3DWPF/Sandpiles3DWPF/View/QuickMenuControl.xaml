@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Sandpiles3DWPF.View.QuickMenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sandpiles3DWPF.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <GroupBox Header="Quick menu" >
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Button Grid.Row="0" Grid.Column="0"  Command="{Binding QuickMenuCommand[0]}"  Content="{Binding QuickMenuCommand[0], Converter={StaticResource commandNameConverter}}"/>
+            <Button Grid.Row="0" Grid.Column="1"  Command="{Binding QuickMenuCommand[1]}"  Content="{Binding QuickMenuCommand[1], Converter={StaticResource commandNameConverter}}"/>
+            <Button Grid.Row="0" Grid.Column="2"  Command="{Binding QuickMenuCommand[2]}"  Content="{Binding QuickMenuCommand[2], Converter={StaticResource commandNameConverter}}"/>
+            <Button Grid.Row="1" Grid.Column="0"   Command="{Binding QuickMenuCommand[3]}"  Content="{Binding QuickMenuCommand[3], Converter={StaticResource commandNameConverter}}"/>
+            <Button Grid.Row="1" Grid.Column="1"   Command="{Binding QuickMenuCommand[4]}"  Content="{Binding QuickMenuCommand[4], Converter={StaticResource commandNameConverter}}"/>
+            <Button Grid.Row="1" Grid.Column="2"   Command="{Binding QuickMenuCommand[5]}"  Content="{Binding QuickMenuCommand[5], Converter={StaticResource commandNameConverter}}"/>
+        </Grid >
+    </GroupBox>
+</UserControl>
