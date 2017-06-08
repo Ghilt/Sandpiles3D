@@ -42,6 +42,7 @@
     <Reference Include="ManagedCuda">
       <HintPath>libs\ManagedCuda.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -69,13 +70,14 @@
     <Compile Include="Converters\EnumBoolConverter.cs" />
     <Compile Include="Converters\CommandNameConverter.cs" />
     <Compile Include="Converters\CoordEnabledAidConverter.cs" />
+    <Compile Include="Converters\IntegerForkMultiConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
     <Compile Include="Model\BackgroundSandpilesWorker.cs" />
     <Compile Include="Converters\InvertBoolConverter.cs" />
     <Compile Include="Model\Cuda\BackgroundSandpilesWorkerCuda.cs" />
     <Compile Include="Model\Cuda\SandpilesCalculatorCuda.cs" />
-    <Compile Include="StyleDictionary.xaml.cs">
+    <Compile Include="ResourceDictionaries\StyleDictionary.xaml.cs">
       <DependentUpon>StyleDictionary.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CubeGrid.cs" />
@@ -107,6 +109,10 @@
     <Compile Include="View\SandpilesView.xaml.cs">
       <DependentUpon>SandpilesView.xaml</DependentUpon>
     </Compile>
+    <Page Include="ResourceDictionaries\ComboBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -119,7 +125,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StyleDictionary.xaml">
+    <Page Include="ResourceDictionaries\StyleDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

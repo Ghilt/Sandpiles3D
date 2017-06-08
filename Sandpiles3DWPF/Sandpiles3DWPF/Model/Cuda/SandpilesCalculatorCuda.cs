@@ -12,6 +12,8 @@ namespace Sandpiles3DWPF.Model.Cuda
 {
     class SandpilesCalculatorCuda : SandpilesCalculator
     {
+        public static readonly int[] AVAILABLE_CUDA_DIMENSIONS = new int[] { 32, 64, 128, 256 };
+
         private const string KERNEL_LOCATION = "Sandpiles3DWPF.SandpilesGPUKernel.ptx";
         private const string KERNEL_METHOD_NORMAL = "CalculateSandpilesDeltaThreadPerZColumn";
 

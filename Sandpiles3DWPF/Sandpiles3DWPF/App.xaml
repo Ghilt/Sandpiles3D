@@ -17,10 +17,12 @@
             </Converters:ValueConverterGroup>
             <Converters:CommandNameConverter x:Key="commandNameConverter"/>
             <Converters:InvertBoolConverter x:Key="invertBoolConverter"/>
+            <Converters:ForkValueMultiConverter x:Key="forkValueConverter"/>
             <Converters:CoordEnabledAidConverter x:Key="coordEnabledScaleConverter"/>
             <Converters:EnumBoolConverter x:Key="enumBoolConverter"/>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="StyleDictionary.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/StyleDictionary.xaml"/>
+                <ResourceDictionary Source="ResourceDictionaries/ComboBoxStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

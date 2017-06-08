@@ -67,6 +67,15 @@ namespace Sandpiles3DWPF.ViewModel
 
         public ObservableStringAccessor<int>[] SizeDim { get; set; }
 
+        private int[] availableCudaDimensions;
+        public int[] AvailableCudaDimensions
+        {
+            get
+            {
+                return availableCudaDimensions = availableCudaDimensions ?? SandpilesCalculatorCuda.AVAILABLE_CUDA_DIMENSIONS;
+            }
+        }
+
         private ICommand setSizeCommand;
         public ICommand SetSizeCommand
         {

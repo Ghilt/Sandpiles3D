@@ -23,6 +23,15 @@
         <Setter Property="BorderBrush" Value="#739969" />
     </Style>
 
+    <Style TargetType="ToggleButton">
+        <Setter Property="Background" Value="#dfecdc" />
+        <Setter Property="BorderBrush" Value="#739969" />
+    </Style>
+   
+    <Style TargetType="ComboBoxItem">
+        <Setter Property="BorderBrush" Value="#dfecdc" />
+    </Style>
+
     <Style TargetType="TabControl">
         <Setter Property="BorderBrush" Value="#739969" />
     </Style>
