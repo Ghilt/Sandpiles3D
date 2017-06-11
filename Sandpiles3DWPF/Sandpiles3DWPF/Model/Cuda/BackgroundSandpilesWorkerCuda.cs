@@ -20,11 +20,11 @@ namespace Sandpiles3DWPF.Model.Cuda
         }
 
         public override void PrepareForWork() {
-            cudaModel.loadKernel();
+            cudaModel.LoadKernel();
         }
 
         public override void TearDownAfterWorkPerformed() {
-            cudaModel.disposeKernel();
+            cudaModel.DisposeKernel();
         }
 
     }   

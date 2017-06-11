@@ -30,7 +30,7 @@
                     <TextBox Grid.Row="0" Grid.Column="1" Text = "{Binding SizeDim[0].Value, Mode=TwoWay}"/>
                     <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding SizeDim[1].Value, Mode=TwoWay}"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding SizeDim[2].Value, Mode=TwoWay}"/>
-                    <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Command="{Binding SetSizeCommand}" CommandParameter="CPU" Content="Set size" VerticalAlignment="Bottom"/>
+                    <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Command="{Binding SetSizeCommand}" Content="Set size" VerticalAlignment="Bottom"/>
                 </Grid >
             </GroupBox>
         </TabItem>
@@ -52,7 +52,7 @@
                         <RowDefinition Height="Auto"/>
                     </Grid.RowDefinitions>
 
-                    <ComboBox Name="CudaDimensionsComboBox"  Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailableCudaDimensions}" Style="{DynamicResource ComboBoxStyle}" Margin="3,0" Height="21">
+                    <ComboBox Name="CudaDimensionsComboBox" Grid.Row="0" Grid.Column="1" ItemsSource="{Binding AvailableCudaDimensions}" Style="{DynamicResource ComboBoxStyle}" Margin="3,0" Height="21">
                         <ComboBox.SelectedValue>
                             <MultiBinding Converter="{StaticResource forkValueConverter}">
                                 <Binding Path="SizeDim[0].Value"/>
@@ -66,7 +66,7 @@
                     <Label Grid.Row="2" Grid.Column="0" Content="Z" />
                     <TextBox Grid.Row="1" Grid.Column="1" Text = "{Binding ElementName= CudaDimensionsComboBox, Path=SelectedItem}" IsReadOnly="True" IsEnabled="False" ToolTip="Y-dimension locked to x-dimension when running on GPU"/>
                     <TextBox Grid.Row="2" Grid.Column="1" Text = "{Binding SizeDim[2].Value, Mode=TwoWay}"/>
-                    <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Command="{Binding SetSizeCommand}" CommandParameter="CPU" Content="Set size" VerticalAlignment="Bottom"/>
+                    <Button Grid.Row="1" Grid.Column="2" Grid.RowSpan="2" Command="{Binding SetSizeCommand}" CommandParameter="cuda" Content="Set size" VerticalAlignment="Bottom"/>
                 </Grid >
             </GroupBox>
         </TabItem>

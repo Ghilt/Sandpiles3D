@@ -70,12 +70,13 @@
     <Compile Include="Converters\EnumBoolConverter.cs" />
     <Compile Include="Converters\CommandNameConverter.cs" />
     <Compile Include="Converters\CoordEnabledAidConverter.cs" />
-    <Compile Include="Converters\IntegerForkMultiConverter.cs" />
+    <Compile Include="Converters\ForkIntCudaDimensionMultiConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
     <Compile Include="Model\BackgroundSandpilesWorker.cs" />
     <Compile Include="Converters\InvertBoolConverter.cs" />
     <Compile Include="Model\Cuda\BackgroundSandpilesWorkerCuda.cs" />
+    <Compile Include="Model\Cuda\CudaKernelDimensions.cs" />
     <Compile Include="Model\Cuda\SandpilesCalculatorCuda.cs" />
     <Compile Include="ResourceDictionaries\StyleDictionary.xaml.cs">
       <DependentUpon>StyleDictionary.xaml</DependentUpon>

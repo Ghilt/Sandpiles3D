@@ -67,8 +67,8 @@ namespace Sandpiles3DWPF.ViewModel
 
         public ObservableStringAccessor<int>[] SizeDim { get; set; }
 
-        private int[] availableCudaDimensions;
-        public int[] AvailableCudaDimensions
+        private CudaKernelDimensions[] availableCudaDimensions;
+        public CudaKernelDimensions[] AvailableCudaDimensions
         {
             get
             {
@@ -81,7 +81,7 @@ namespace Sandpiles3DWPF.ViewModel
         {
             get
             {
-                return setSizeCommand = setSizeCommand ?? new RelayCommand(p => ReSize(SizeDim[0].Value, SizeDim[1].Value, SizeDim[2].Value));
+                return setSizeCommand = setSizeCommand ?? new RelayCommand(p => ReConfigureModel(SizeDim[0].Value, SizeDim[1].Value, SizeDim[2].Value, "cuda" == (p as string) ));
             }
         }
 
@@ -255,10 +255,10 @@ namespace Sandpiles3DWPF.ViewModel
 
         }
 
-        public void LoadSandpiles(int width, int height, int depth)
+        public void LoadSandpiles(int width, int height, int depth, bool useCuda)
         {
             System.Diagnostics.Debug.WriteLine("Loading sandpiles: width(" + width + "), height(" + height + "), depth(" + depth + ")");
-            if (CONFIG_FORCE_USE_CUDA)
+            if (useCuda || CONFIG_FORCE_USE_CUDA)
             {
                 model = new SandpilesCalculatorCuda(ModelPropertyChanged, width, height, depth);
                 worker = new BackgroundSandpilesWorkerCuda(visualization, ModelPropertyChanged, model as SandpilesCalculatorCuda);
@@ -274,7 +274,7 @@ namespace Sandpiles3DWPF.ViewModel
             }
         }
 
-        public void ReSize(int width, int height, int depth) // Find better way to reset to initial state
+        public void ReConfigureModel(int width, int height, int depth, bool useCuda) // Find better way to reset to initial state
         {
             //Process.Start(Application.ResourceAssembly.Location, width + "," + height + "," + depth);
             //System.Windows.Application.Current.Shutdown();
@@ -289,7 +289,7 @@ namespace Sandpiles3DWPF.ViewModel
             model.PropertyChanged -= ModelPropertyChanged;
             IsIterating = false;
             Image2D = BitmapFactory.New(width, height);
-            LoadSandpiles(width, height, depth);
+            LoadSandpiles(width, height, depth, useCuda);
         }
 
         private void Create3DGridInBackground(int width, int height, int depth)

@@ -17,7 +17,7 @@
             </Converters:ValueConverterGroup>
             <Converters:CommandNameConverter x:Key="commandNameConverter"/>
             <Converters:InvertBoolConverter x:Key="invertBoolConverter"/>
-            <Converters:ForkValueMultiConverter x:Key="forkValueConverter"/>
+            <Converters:ForkIntCudaDimensionMultiConverter x:Key="forkValueConverter"/>
             <Converters:CoordEnabledAidConverter x:Key="coordEnabledScaleConverter"/>
             <Converters:EnumBoolConverter x:Key="enumBoolConverter"/>
             <ResourceDictionary.MergedDictionaries>
