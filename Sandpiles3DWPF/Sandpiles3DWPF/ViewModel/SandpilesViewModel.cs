@@ -21,7 +21,7 @@ namespace Sandpiles3DWPF.ViewModel
     class SandpilesViewModel : INotifyPropertyChanged
     {
 
-        private SandpilesCalculator model;
+        private AbstractSandpilesCalculator model;
         private BackgroundSandpilesWorker worker;
 
         #region Visualization control
@@ -261,12 +261,13 @@ namespace Sandpiles3DWPF.ViewModel
             if (useCuda || CONFIG_FORCE_USE_CUDA)
             {
                 model = new SandpilesCalculatorCuda(ModelPropertyChanged, width, height, depth);
-                worker = new BackgroundSandpilesWorkerCuda(visualization, ModelPropertyChanged, model as SandpilesCalculatorCuda);
-            } else
+            }
+            else
             {
                 model = new SandpilesCalculator(ModelPropertyChanged, width, height, depth);
-                worker = new BackgroundSandpilesWorker(visualization, ModelPropertyChanged, model as SandpilesCalculator);
-            }          
+            }     
+                 
+            worker = new BackgroundSandpilesWorker(visualization, ModelPropertyChanged, model);
 
             if (CONFIG_RENDER_3D_ENABLED)
             {

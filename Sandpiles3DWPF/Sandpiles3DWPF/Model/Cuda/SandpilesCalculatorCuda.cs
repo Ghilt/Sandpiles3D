@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Sandpiles3DWPF.Model.Cuda
 {
-    class SandpilesCalculatorCuda : SandpilesCalculator
+    class SandpilesCalculatorCuda : AbstractSandpilesCalculator
     {
         public static readonly CudaKernelDimensions[] AVAILABLE_CUDA_DIMENSIONS = new CudaKernelDimensions[] {
             new CudaKernelDimensions(32, 2, 16),
@@ -47,7 +47,7 @@ namespace Sandpiles3DWPF.Model.Cuda
             side = width;
         }
 
-        internal void LoadKernel()
+        public override void PreIterate()
         {
             ctx = new CudaContext(CudaContext.GetMaxGflopsDeviceId());
             kernel = ctx.LoadKernelPTX(stream, KERNEL_METHOD_NORMAL);
@@ -65,12 +65,12 @@ namespace Sandpiles3DWPF.Model.Cuda
 
         }
 
-        internal void DisposeKernel()
+        public override void PostIterate()
         {
             ctx.Dispose();
         }
 
-        public override void Iterate()
+        public override IterationResult PerformIterate(int[] space, int[] delta)
         {
             int[] h_origin = space;
             int[] h_delta;
@@ -80,15 +80,15 @@ namespace Sandpiles3DWPF.Model.Cuda
             d_nextIteration = new CudaDeviceVariable<int>(size);
             float elapsed = kernel.Run(d_origin.DevicePointer, d_delta.DevicePointer, d_nextIteration.DevicePointer);
 
-            h_delta = d_delta;
             h_nextIteration = d_nextIteration;
+            h_delta = d_delta;
 
-            space = h_nextIteration;
-            delta = h_delta;
+            IterationResult result = new IterationResult(h_nextIteration, h_delta);
 
             d_origin.Dispose();
             d_delta.Dispose();
             d_nextIteration.Dispose();
+            return result;
         }
 
         public bool CheckCudaAvailable()

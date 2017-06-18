@@ -16,14 +16,14 @@ namespace Sandpiles3DWPF.Model
         public const string PROPERTY_CHANGED_CONTINUOUS_ITERATION_STOPPED = "Property_changed_continuous_cancelled";
 
         public event PropertyChangedEventHandler PropertyChanged;
-        private SandpilesCalculator model;
+        private AbstractSandpilesCalculator model;
         private BackgroundWorker bw;
         private VisualizationMode visualizationMode;
 
         public long lastIterationDuration { get; private set; }
         public SandpilesIterationData iterationData { get; private set; }
 
-        public BackgroundSandpilesWorker(VisualizationMode visualizationMode, PropertyChangedEventHandler propertyChangedListener, SandpilesCalculator model)
+        public BackgroundSandpilesWorker(VisualizationMode visualizationMode, PropertyChangedEventHandler propertyChangedListener, AbstractSandpilesCalculator model)
         {
             this.model = model;
             this.visualizationMode = visualizationMode;
@@ -56,19 +56,16 @@ namespace Sandpiles3DWPF.Model
 
         internal void PerformSingleIteration(object sender, DoWorkEventArgs e)
         {
-            PrepareForWork();
             BackgroundWorker worker = (BackgroundWorker)sender;
             var watch = System.Diagnostics.Stopwatch.StartNew();
             model.Iterate();
             watch.Stop();
             lastIterationDuration = watch.ElapsedMilliseconds;
             e.Result = getIterationReturnData();
-            TearDownAfterWorkPerformed();
         }
 
         private void PerformContinousIteration(object sender, DoWorkEventArgs e)
         {
-            PrepareForWork();
             BackgroundWorker worker = (BackgroundWorker)sender;
             while (!worker.CancellationPending)
             {
@@ -82,7 +79,6 @@ namespace Sandpiles3DWPF.Model
                     System.Threading.Thread.Sleep(100);
                 }
             }
-            TearDownAfterWorkPerformed();
             OnPropertyChanged(PROPERTY_CHANGED_CONTINUOUS_ITERATION_STOPPED);
             workerStoppedClearCallbacks();
             e.Cancel = true; // what does this do?
@@ -127,7 +123,6 @@ namespace Sandpiles3DWPF.Model
 
         protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
-            //invoke if not null
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
@@ -135,8 +130,5 @@ namespace Sandpiles3DWPF.Model
         {
             visualizationMode = mode;
         }
-
-        public virtual void PrepareForWork() { /*Used in subclass*/ } 
-        public virtual void TearDownAfterWorkPerformed() { /*Used in subclass*/ }
     }
 }

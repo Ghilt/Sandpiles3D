@@ -73,11 +73,12 @@
     <Compile Include="Converters\ForkIntCudaDimensionMultiConverter.cs" />
     <Compile Include="Converters\ValueConverterGroup.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
+    <Compile Include="Model\AbstractSandpilesCalculator.cs" />
     <Compile Include="Model\BackgroundSandpilesWorker.cs" />
     <Compile Include="Converters\InvertBoolConverter.cs" />
-    <Compile Include="Model\Cuda\BackgroundSandpilesWorkerCuda.cs" />
     <Compile Include="Model\Cuda\CudaKernelDimensions.cs" />
     <Compile Include="Model\Cuda\SandpilesCalculatorCuda.cs" />
+    <Compile Include="Model\IterationResult.cs" />
     <Compile Include="ResourceDictionaries\StyleDictionary.xaml.cs">
       <DependentUpon>StyleDictionary.xaml</DependentUpon>
     </Compile>
