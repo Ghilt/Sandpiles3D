@@ -19,6 +19,9 @@
                                  IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=ThreeDimensions}"
                                  Command="{Binding VisualizationChangedCommand}"
                                  IsEnabled="{Binding CONFIG_RENDER_3D_ENABLED}"/>
+            <RadioButton GroupName="Visualization" HorizontalAlignment="Left" Content="None" 
+                                 IsChecked="{Binding Visualization, Converter={StaticResource enumBoolConverter}, ConverterParameter=None}"                  
+                                 Command="{Binding VisualizationChangedCommand}"/>
         </StackPanel >
     </GroupBox>
 </UserControl>

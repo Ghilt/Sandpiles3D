@@ -138,6 +138,11 @@ namespace Sandpiles3DWPF.Model
             }
         }
 
+        internal SandpilesIterationData GetIterationOnly()
+        {
+            return new SandpilesIterationData(iterationCounter, null as int[]);
+        }
+
         internal SandpilesIterationData Get2DProjection() // move method to helper class
         {
             int dims = 3;

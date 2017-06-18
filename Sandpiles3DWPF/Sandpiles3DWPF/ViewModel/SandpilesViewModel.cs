@@ -42,7 +42,7 @@ namespace Sandpiles3DWPF.ViewModel
 
         public enum VisualizationMode
         {
-            Flatten, CrossSection, ThreeDimensions
+            Flatten, CrossSection, ThreeDimensions, None
         }
 
         private VisualizationMode visualization;

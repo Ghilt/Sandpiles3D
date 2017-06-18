@@ -94,6 +94,8 @@ namespace Sandpiles3DWPF.Model
                     return model.GetCrossSection(model.getMidZ(), false, false, true);
                 case VisualizationMode.ThreeDimensions:
                     return model.GetBinary3DRepresentation();
+                case VisualizationMode.None:
+                    return model.GetIterationOnly();
                 default:
                     return null;
             }
