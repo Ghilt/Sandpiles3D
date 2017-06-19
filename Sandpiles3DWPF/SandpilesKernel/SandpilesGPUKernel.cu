@@ -35,7 +35,7 @@ extern "C" {
 	{
 		int x = blockDim.x * blockIdx.x + threadIdx.x;
 		int y = blockDim.y * blockIdx.y + threadIdx.y;
-		int coordPart = x * sideTimesDepth + y * side;
+		int coordPart = x * sideTimesDepth + y * depth;
 		int xN = x - 1;
 		int xP = x + 1;
 		int yN = y - 1;
@@ -44,10 +44,10 @@ extern "C" {
 		bool xPInBounds = xP < side;
 		bool yNInBounds = yN >= 0;
 		bool yPInBounds = yP < side;
-		int xNCoordPart = xN * sideTimesDepth + y * side;
-		int xPCoordPart = xP * sideTimesDepth + y * side;
-		int yNCoordPart = x * sideTimesDepth + yN * side;
-		int yPCoordPart = x * sideTimesDepth + yP * side;
+		int xNCoordPart = xN * sideTimesDepth + y * depth;
+		int xPCoordPart = xP * sideTimesDepth + y * depth;
+		int yNCoordPart = x * sideTimesDepth + yN * depth;
+		int yPCoordPart = x * sideTimesDepth + yP * depth;
 		int z = 0;
 		while (z < depth) {
 			int coord = coordPart + z;

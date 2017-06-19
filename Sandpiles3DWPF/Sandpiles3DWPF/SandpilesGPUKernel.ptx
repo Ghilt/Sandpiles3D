@@ -25,7 +25,7 @@
 {
 	.reg .pred 	%p<63>;
 	.reg .b16 	%rs<9>;
-	.reg .b32 	%r<160>;
+	.reg .b32 	%r<162>;
 
 
 	.loc 1 34 1
@@ -58,7 +58,7 @@ tmp2:
 	cvta.const.u32 	%r32, %r31;
 	ld.u32 	%r33, [%r32];
 	mul.lo.s32 	%r34, %r25, %r33;
-	mov.u32 	%r35, side;
+	mov.u32 	%r35, depth;
 	cvta.const.u32 	%r36, %r35;
 	ld.u32 	%r37, [%r36];
 	mul.lo.s32 	%r38, %r30, %r37;
@@ -80,55 +80,57 @@ tmp7:
 	setp.ge.s32	%p13, %r39, 0;
 	selp.u16	%rs1, 1, 0, %p13;
 	.loc	1 44 1
-	ld.u32 	%r43, [%r36];
-	setp.lt.s32	%p14, %r40, %r43;
+	mov.u32 	%r43, side;
+	cvta.const.u32 	%r44, %r43;
+	ld.u32 	%r45, [%r44];
+	setp.lt.s32	%p14, %r40, %r45;
 	selp.u16	%rs2, 1, 0, %p14;
 	.loc	1 45 1
 	setp.ge.s32	%p15, %r41, 0;
 	selp.u16	%rs3, 1, 0, %p15;
 	.loc	1 46 1
-	ld.u32 	%r44, [%r36];
-	setp.lt.s32	%p16, %r42, %r44;
+	ld.u32 	%r46, [%r44];
+	setp.lt.s32	%p16, %r42, %r46;
 	selp.u16	%rs4, 1, 0, %p16;
 	.loc	1 47 1
-	ld.u32 	%r45, [%r32];
-	mul.lo.s32 	%r46, %r39, %r45;
-	ld.u32 	%r47, [%r36];
-	mul.lo.s32 	%r48, %r30, %r47;
-	add.s32 	%r2, %r46, %r48;
+	ld.u32 	%r47, [%r32];
+	mul.lo.s32 	%r48, %r39, %r47;
+	ld.u32 	%r49, [%r36];
+	mul.lo.s32 	%r50, %r30, %r49;
+	add.s32 	%r2, %r48, %r50;
 tmp8:
 	.loc	1 48 1
-	ld.u32 	%r49, [%r32];
-	mul.lo.s32 	%r50, %r40, %r49;
-	ld.u32 	%r51, [%r36];
-	mul.lo.s32 	%r52, %r30, %r51;
-	add.s32 	%r3, %r50, %r52;
+	ld.u32 	%r51, [%r32];
+	mul.lo.s32 	%r52, %r40, %r51;
+	ld.u32 	%r53, [%r36];
+	mul.lo.s32 	%r54, %r30, %r53;
+	add.s32 	%r3, %r52, %r54;
 tmp9:
 	.loc	1 49 1
-	ld.u32 	%r53, [%r32];
-	mul.lo.s32 	%r54, %r25, %r53;
-	ld.u32 	%r55, [%r36];
-	mul.lo.s32 	%r56, %r41, %r55;
-	add.s32 	%r4, %r54, %r56;
+	ld.u32 	%r55, [%r32];
+	mul.lo.s32 	%r56, %r25, %r55;
+	ld.u32 	%r57, [%r36];
+	mul.lo.s32 	%r58, %r41, %r57;
+	add.s32 	%r4, %r56, %r58;
 tmp10:
 	.loc	1 50 1
-	ld.u32 	%r57, [%r32];
-	mul.lo.s32 	%r58, %r25, %r57;
-	ld.u32 	%r59, [%r36];
-	mul.lo.s32 	%r60, %r42, %r59;
-	add.s32 	%r5, %r58, %r60;
+	ld.u32 	%r59, [%r32];
+	mul.lo.s32 	%r60, %r25, %r59;
+	ld.u32 	%r61, [%r36];
+	mul.lo.s32 	%r62, %r42, %r61;
+	add.s32 	%r5, %r60, %r62;
 tmp11:
-	mov.u32 	%r61, 0;
+	mov.u32 	%r63, 0;
 	.loc	1 51 1
-	mov.b32 	%r159, %r61;
+	mov.b32 	%r161, %r63;
 tmp12:
 
 BB0_1:
 	.loc	1 52 1
-	mov.u32 	%r62, depth;
-	cvta.const.u32 	%r63, %r62;
-	ld.u32 	%r64, [%r63];
-	setp.lt.s32	%p17, %r159, %r64;
+	mov.u32 	%r64, depth;
+	cvta.const.u32 	%r65, %r64;
+	ld.u32 	%r66, [%r65];
+	setp.lt.s32	%p17, %r161, %r66;
 	not.pred 	%p18, %p17;
 	@%p18 bra 	BB0_41;
 	bra.uni 	BB0_2;
@@ -136,22 +138,22 @@ BB0_1:
 BB0_2:
 	.loc	1 53 1
 tmp13:
-	add.s32 	%r8, %r1, %r159;
+	add.s32 	%r8, %r1, %r161;
 tmp14:
 	.loc	1 54 1
-	sub.s32 	%r9, %r159, 1;
+	sub.s32 	%r9, %r161, 1;
 tmp15:
 	.loc	1 55 1
-	add.s32 	%r10, %r159, 1;
+	add.s32 	%r10, %r161, 1;
 tmp16:
 	.loc	1 57 1
-	shl.b32 	%r65, %r8, 2;
-	add.s32 	%r66, %r18, %r65;
-	ld.u32 	%r67, [%r66];
-	mov.u32 	%r68, maxVal;
-	cvta.const.u32 	%r69, %r68;
-	ld.u32 	%r70, [%r69];
-	setp.ge.s32	%p19, %r67, %r70;
+	shl.b32 	%r67, %r8, 2;
+	add.s32 	%r68, %r18, %r67;
+	ld.u32 	%r69, [%r68];
+	mov.u32 	%r70, maxVal;
+	cvta.const.u32 	%r71, %r70;
+	ld.u32 	%r72, [%r71];
+	setp.ge.s32	%p19, %r69, %r72;
 	not.pred 	%p20, %p19;
 	@%p20 bra 	BB0_4;
 	bra.uni 	BB0_3;
@@ -159,14 +161,14 @@ tmp16:
 BB0_3:
 	.loc	1 59 1
 tmp17:
-	mov.u32 	%r71, maxVal;
-	cvta.const.u32 	%r72, %r71;
-	ld.u32 	%r73, [%r72];
-	shl.b32 	%r74, %r8, 2;
-	add.s32 	%r75, %r19, %r74;
-	ld.u32 	%r76, [%r75];
-	sub.s32 	%r77, %r76, %r73;
-	st.u32 	[%r75], %r77;
+	mov.u32 	%r73, maxVal;
+	cvta.const.u32 	%r74, %r73;
+	ld.u32 	%r75, [%r74];
+	shl.b32 	%r76, %r8, 2;
+	add.s32 	%r77, %r19, %r76;
+	ld.u32 	%r78, [%r77];
+	sub.s32 	%r79, %r78, %r75;
+	st.u32 	[%r77], %r79;
 tmp18:
 
 BB0_4:
@@ -180,7 +182,7 @@ BB0_4:
 BB0_5:
 	.loc	1 63 1
 tmp19:
-	add.s32 	%r11, %r2, %r159;
+	add.s32 	%r11, %r2, %r161;
 tmp20:
 	.loc	1 64 1
 	setp.ge.s32	%p24, %r11, 0;
@@ -190,13 +192,13 @@ tmp20:
 	bra.uni 	BB0_6;
 
 BB0_6:
-	shl.b32 	%r78, %r11, 2;
-	add.s32 	%r79, %r18, %r78;
-	ld.u32 	%r80, [%r79];
-	mov.u32 	%r81, maxVal;
-	cvta.const.u32 	%r82, %r81;
-	ld.u32 	%r83, [%r82];
-	setp.ge.s32	%p57, %r80, %r83;
+	shl.b32 	%r80, %r11, 2;
+	add.s32 	%r81, %r18, %r80;
+	ld.u32 	%r82, [%r81];
+	mov.u32 	%r83, maxVal;
+	cvta.const.u32 	%r84, %r83;
+	ld.u32 	%r85, [%r84];
+	setp.ge.s32	%p57, %r82, %r85;
 
 BB0_7:
 	not.pred 	%p26, %p57;
@@ -206,11 +208,11 @@ BB0_7:
 BB0_8:
 	.loc	1 65 1
 tmp21:
-	shl.b32 	%r84, %r8, 2;
-	add.s32 	%r85, %r19, %r84;
-	ld.u32 	%r86, [%r85];
-	add.s32 	%r87, %r86, 1;
-	st.u32 	[%r85], %r87;
+	shl.b32 	%r86, %r8, 2;
+	add.s32 	%r87, %r19, %r86;
+	ld.u32 	%r88, [%r87];
+	add.s32 	%r89, %r88, 1;
+	st.u32 	[%r87], %r89;
 tmp22:
 
 BB0_9:
@@ -226,26 +228,26 @@ BB0_10:
 BB0_11:
 	.loc	1 69 1
 tmp23:
-	add.s32 	%r12, %r3, %r159;
+	add.s32 	%r12, %r3, %r161;
 tmp24:
 	.loc	1 70 1
-	mov.u32 	%r88, size;
-	cvta.const.u32 	%r89, %r88;
-	ld.u32 	%r90, [%r89];
-	setp.lt.s32	%p30, %r12, %r90;
+	mov.u32 	%r90, size;
+	cvta.const.u32 	%r91, %r90;
+	ld.u32 	%r92, [%r91];
+	setp.lt.s32	%p30, %r12, %r92;
 	mov.pred 	%p58, 0;
 	not.pred 	%p31, %p30;
 	@%p31 bra 	BB0_13;
 	bra.uni 	BB0_12;
 
 BB0_12:
-	shl.b32 	%r91, %r12, 2;
-	add.s32 	%r92, %r18, %r91;
-	ld.u32 	%r93, [%r92];
-	mov.u32 	%r94, maxVal;
-	cvta.const.u32 	%r95, %r94;
-	ld.u32 	%r96, [%r95];
-	setp.ge.s32	%p58, %r93, %r96;
+	shl.b32 	%r93, %r12, 2;
+	add.s32 	%r94, %r18, %r93;
+	ld.u32 	%r95, [%r94];
+	mov.u32 	%r96, maxVal;
+	cvta.const.u32 	%r97, %r96;
+	ld.u32 	%r98, [%r97];
+	setp.ge.s32	%p58, %r95, %r98;
 
 BB0_13:
 	not.pred 	%p32, %p58;
@@ -255,11 +257,11 @@ BB0_13:
 BB0_14:
 	.loc	1 71 1
 tmp25:
-	shl.b32 	%r97, %r8, 2;
-	add.s32 	%r98, %r19, %r97;
-	ld.u32 	%r99, [%r98];
-	add.s32 	%r100, %r99, 1;
-	st.u32 	[%r98], %r100;
+	shl.b32 	%r99, %r8, 2;
+	add.s32 	%r100, %r19, %r99;
+	ld.u32 	%r101, [%r100];
+	add.s32 	%r102, %r101, 1;
+	st.u32 	[%r100], %r102;
 tmp26:
 
 BB0_15:
@@ -275,7 +277,7 @@ BB0_16:
 BB0_17:
 	.loc	1 75 1
 tmp27:
-	add.s32 	%r13, %r4, %r159;
+	add.s32 	%r13, %r4, %r161;
 tmp28:
 	.loc	1 76 1
 	setp.ge.s32	%p36, %r13, 0;
@@ -285,13 +287,13 @@ tmp28:
 	bra.uni 	BB0_18;
 
 BB0_18:
-	shl.b32 	%r101, %r13, 2;
-	add.s32 	%r102, %r18, %r101;
-	ld.u32 	%r103, [%r102];
-	mov.u32 	%r104, maxVal;
-	cvta.const.u32 	%r105, %r104;
-	ld.u32 	%r106, [%r105];
-	setp.ge.s32	%p59, %r103, %r106;
+	shl.b32 	%r103, %r13, 2;
+	add.s32 	%r104, %r18, %r103;
+	ld.u32 	%r105, [%r104];
+	mov.u32 	%r106, maxVal;
+	cvta.const.u32 	%r107, %r106;
+	ld.u32 	%r108, [%r107];
+	setp.ge.s32	%p59, %r105, %r108;
 
 BB0_19:
 	not.pred 	%p38, %p59;
@@ -301,11 +303,11 @@ BB0_19:
 BB0_20:
 	.loc	1 77 1
 tmp29:
-	shl.b32 	%r107, %r8, 2;
-	add.s32 	%r108, %r19, %r107;
-	ld.u32 	%r109, [%r108];
-	add.s32 	%r110, %r109, 1;
-	st.u32 	[%r108], %r110;
+	shl.b32 	%r109, %r8, 2;
+	add.s32 	%r110, %r19, %r109;
+	ld.u32 	%r111, [%r110];
+	add.s32 	%r112, %r111, 1;
+	st.u32 	[%r110], %r112;
 tmp30:
 
 BB0_21:
@@ -321,26 +323,26 @@ BB0_22:
 BB0_23:
 	.loc	1 81 1
 tmp31:
-	add.s32 	%r14, %r5, %r159;
+	add.s32 	%r14, %r5, %r161;
 tmp32:
 	.loc	1 82 1
-	mov.u32 	%r111, size;
-	cvta.const.u32 	%r112, %r111;
-	ld.u32 	%r113, [%r112];
-	setp.lt.s32	%p42, %r14, %r113;
+	mov.u32 	%r113, size;
+	cvta.const.u32 	%r114, %r113;
+	ld.u32 	%r115, [%r114];
+	setp.lt.s32	%p42, %r14, %r115;
 	mov.pred 	%p60, 0;
 	not.pred 	%p43, %p42;
 	@%p43 bra 	BB0_25;
 	bra.uni 	BB0_24;
 
 BB0_24:
-	shl.b32 	%r114, %r14, 2;
-	add.s32 	%r115, %r18, %r114;
-	ld.u32 	%r116, [%r115];
-	mov.u32 	%r117, maxVal;
-	cvta.const.u32 	%r118, %r117;
-	ld.u32 	%r119, [%r118];
-	setp.ge.s32	%p60, %r116, %r119;
+	shl.b32 	%r116, %r14, 2;
+	add.s32 	%r117, %r18, %r116;
+	ld.u32 	%r118, [%r117];
+	mov.u32 	%r119, maxVal;
+	cvta.const.u32 	%r120, %r119;
+	ld.u32 	%r121, [%r120];
+	setp.ge.s32	%p60, %r118, %r121;
 
 BB0_25:
 	not.pred 	%p44, %p60;
@@ -350,11 +352,11 @@ BB0_25:
 BB0_26:
 	.loc	1 83 1
 tmp33:
-	shl.b32 	%r120, %r8, 2;
-	add.s32 	%r121, %r19, %r120;
-	ld.u32 	%r122, [%r121];
-	add.s32 	%r123, %r122, 1;
-	st.u32 	[%r121], %r123;
+	shl.b32 	%r122, %r8, 2;
+	add.s32 	%r123, %r19, %r122;
+	ld.u32 	%r124, [%r123];
+	add.s32 	%r125, %r124, 1;
+	st.u32 	[%r123], %r125;
 tmp34:
 
 BB0_27:
@@ -379,13 +381,13 @@ tmp36:
 	bra.uni 	BB0_30;
 
 BB0_30:
-	shl.b32 	%r124, %r15, 2;
-	add.s32 	%r125, %r18, %r124;
-	ld.u32 	%r126, [%r125];
-	mov.u32 	%r127, maxVal;
-	cvta.const.u32 	%r128, %r127;
-	ld.u32 	%r129, [%r128];
-	setp.ge.s32	%p61, %r126, %r129;
+	shl.b32 	%r126, %r15, 2;
+	add.s32 	%r127, %r18, %r126;
+	ld.u32 	%r128, [%r127];
+	mov.u32 	%r129, maxVal;
+	cvta.const.u32 	%r130, %r129;
+	ld.u32 	%r131, [%r130];
+	setp.ge.s32	%p61, %r128, %r131;
 
 BB0_31:
 	not.pred 	%p50, %p61;
@@ -395,21 +397,21 @@ BB0_31:
 BB0_32:
 	.loc	1 89 1
 tmp37:
-	shl.b32 	%r130, %r8, 2;
-	add.s32 	%r131, %r19, %r130;
-	ld.u32 	%r132, [%r131];
-	add.s32 	%r133, %r132, 1;
-	st.u32 	[%r131], %r133;
+	shl.b32 	%r132, %r8, 2;
+	add.s32 	%r133, %r19, %r132;
+	ld.u32 	%r134, [%r133];
+	add.s32 	%r135, %r134, 1;
+	st.u32 	[%r133], %r135;
 tmp38:
 
 BB0_33:
 
 BB0_34:
 	.loc	1 92 1
-	mov.u32 	%r134, depth;
-	cvta.const.u32 	%r135, %r134;
-	ld.u32 	%r136, [%r135];
-	setp.lt.s32	%p51, %r10, %r136;
+	mov.u32 	%r136, depth;
+	cvta.const.u32 	%r137, %r136;
+	ld.u32 	%r138, [%r137];
+	setp.lt.s32	%p51, %r10, %r138;
 	not.pred 	%p52, %p51;
 	@%p52 bra 	BB0_40;
 	bra.uni 	BB0_35;
@@ -420,23 +422,23 @@ tmp39:
 	add.s32 	%r16, %r1, %r10;
 tmp40:
 	.loc	1 94 1
-	mov.u32 	%r137, size;
-	cvta.const.u32 	%r138, %r137;
-	ld.u32 	%r139, [%r138];
-	setp.lt.s32	%p54, %r16, %r139;
+	mov.u32 	%r139, size;
+	cvta.const.u32 	%r140, %r139;
+	ld.u32 	%r141, [%r140];
+	setp.lt.s32	%p54, %r16, %r141;
 	mov.pred 	%p62, 0;
 	not.pred 	%p55, %p54;
 	@%p55 bra 	BB0_37;
 	bra.uni 	BB0_36;
 
 BB0_36:
-	shl.b32 	%r140, %r16, 2;
-	add.s32 	%r141, %r18, %r140;
-	ld.u32 	%r142, [%r141];
-	mov.u32 	%r143, maxVal;
-	cvta.const.u32 	%r144, %r143;
-	ld.u32 	%r145, [%r144];
-	setp.ge.s32	%p62, %r142, %r145;
+	shl.b32 	%r142, %r16, 2;
+	add.s32 	%r143, %r18, %r142;
+	ld.u32 	%r144, [%r143];
+	mov.u32 	%r145, maxVal;
+	cvta.const.u32 	%r146, %r145;
+	ld.u32 	%r147, [%r146];
+	setp.ge.s32	%p62, %r144, %r147;
 
 BB0_37:
 	not.pred 	%p56, %p62;
@@ -446,29 +448,29 @@ BB0_37:
 BB0_38:
 	.loc	1 95 1
 tmp41:
-	shl.b32 	%r146, %r8, 2;
-	add.s32 	%r147, %r19, %r146;
-	ld.u32 	%r148, [%r147];
-	add.s32 	%r149, %r148, 1;
-	st.u32 	[%r147], %r149;
+	shl.b32 	%r148, %r8, 2;
+	add.s32 	%r149, %r19, %r148;
+	ld.u32 	%r150, [%r149];
+	add.s32 	%r151, %r150, 1;
+	st.u32 	[%r149], %r151;
 tmp42:
 
 BB0_39:
 
 BB0_40:
 	.loc	1 98 1
-	shl.b32 	%r150, %r8, 2;
-	add.s32 	%r151, %r18, %r150;
-	ld.u32 	%r152, [%r151];
-	shl.b32 	%r153, %r8, 2;
-	add.s32 	%r154, %r19, %r153;
-	ld.u32 	%r155, [%r154];
-	add.s32 	%r156, %r152, %r155;
-	shl.b32 	%r157, %r8, 2;
-	add.s32 	%r158, %r20, %r157;
-	st.u32 	[%r158], %r156;
+	shl.b32 	%r152, %r8, 2;
+	add.s32 	%r153, %r18, %r152;
+	ld.u32 	%r154, [%r153];
+	shl.b32 	%r155, %r8, 2;
+	add.s32 	%r156, %r19, %r155;
+	ld.u32 	%r157, [%r156];
+	add.s32 	%r158, %r154, %r157;
+	shl.b32 	%r159, %r8, 2;
+	add.s32 	%r160, %r20, %r159;
+	st.u32 	[%r160], %r158;
 	.loc	1 100 1
-	add.s32 	%r159, %r159, 1;
+	add.s32 	%r161, %r161, 1;
 tmp43:
 	bra.uni 	BB0_1;
 tmp44:
@@ -480,7 +482,7 @@ tmp45:
 func_end0:
 }
 
-	.file	1 "D:/Files/Code/VisualStudio/Sandpiles3D/Sandpiles3DWPF/SandpilesKernel/SandpilesGPUKernel.cu", 1497192722, 6944
+	.file	1 "D:/Files/Code/VisualStudio/Sandpiles3D/Sandpiles3DWPF/SandpilesKernel/SandpilesGPUKernel.cu", 1497893698, 6949
 
 .section .debug_info {
  .b32 1346
@@ -1813,8 +1815,8 @@ func_end0:
  .b8 7
  .b8 0
  .b8 144
- .b8 185
- .b8 234
+ .b8 177
+ .b8 236
  .b8 196
  .b8 145
  .b8 215
@@ -1824,8 +1826,8 @@ func_end0:
  .b8 7
  .b8 0
  .b8 144
- .b8 185
- .b8 234
+ .b8 177
+ .b8 236
  .b8 196
  .b8 145
  .b8 215
@@ -1835,8 +1837,8 @@ func_end0:
  .b8 7
  .b8 0
  .b8 144
- .b8 185
- .b8 234
+ .b8 177
+ .b8 236
  .b8 196
  .b8 145
  .b8 215
