@@ -28,8 +28,20 @@ namespace Sandpiles3DWPF.Model
             var nextIteration = new int[whd];
             for (int x = width - 1; x >= 0; x--)
             {
+                int xN = x - 1;
+                int xP = x + 1;
+                bool xNInBounds = xN >= 0;
+                bool xPInBounds = xP < width;
                 for (int y = height - 1; y >= 0; y--)
                 {
+                    int yN = y - 1;
+                    int yP = y + 1;
+                    bool yNInBounds = yN >= 0;
+                    bool yPInBounds = yP < height;
+                    int xNCoordPart = xN * hd + y * depth;
+                    int xPCoordPart = xP * hd + y * depth;
+                    int yNCoordPart = x * hd + yN * depth;
+                    int yPCoordPart = x * hd + yP * depth;
                     for (int z = depth - 1; z >= 0; z--)
                     {
                         int coord = x * hd + y * depth + z;
@@ -37,40 +49,37 @@ namespace Sandpiles3DWPF.Model
                         {
                             delta[coord] -= MAX_AMOUNT;
                         }
-                        int xN = x - 1;
-                        int xP = x + 1;
-                        int yN = y - 1;
-                        int yP = y + 1;
+
                         int zN = z - 1;
                         int zP = z + 1;
 
-                        if (xN >= 0)
-                        { // possible optimization as the X term is the biggest we do not need to check it 
-                            int coordL = xN * hd + y * depth + z;
+                        if (xNInBounds)
+                        { 
+                            int coordL = xNCoordPart + z;
                             if (coordL >= 0 && space[coordL] >= MAX_AMOUNT)
                             {
                                 delta[coord]++;
                             }
                         }
-                        if (xP < width)
+                        if (xPInBounds)
                         {
-                            int coordR = xP * hd + y * depth + z;
+                            int coordR = xPCoordPart + z;
                             if (coordR < whd && space[coordR] >= MAX_AMOUNT)
                             {
                                 delta[coord]++;
                             }
                         }
-                        if (yN >= 0)
+                        if (yNInBounds)
                         {
-                            int coordD = x * hd + yN * depth + z;
+                            int coordD = yNCoordPart + z;
                             if (coordD >= 0 && space[coordD] >= MAX_AMOUNT)
                             {
                                 delta[coord]++;
                             }
                         }
-                        if (yP < height)
+                        if (yPInBounds)
                         {
-                            int coordU = x * hd + yP * depth + z;
+                            int coordU = yPCoordPart + z;
                             if (coordU < whd && space[coordU] >= MAX_AMOUNT)
                             {
                                 delta[coord]++;
